@@ -1,11 +1,11 @@
 import React from 'react'
 
-const PacientesBuscar = ({nombre, setNombre, idPaciente, setIdPaciente, buscarPaciente}) => {
+const PacientesBuscar = ({nombre, setNombre, idPaciente, setIdPaciente, buscarPacientes, agregarPaciente}) => {
   
   const handleSearch = (e) => {
     e.preventDefault();
-    // buscarPaciente(e.target.value);
-    alert("Buscando paciente...");
+    // alert("Buscando paciente...");
+    buscarPacientes(nombre);
   }
   
   return (
@@ -21,7 +21,7 @@ const PacientesBuscar = ({nombre, setNombre, idPaciente, setIdPaciente, buscarPa
         </div>
         <div>
             <button type="submit">BUSCAR</button>
-            <button>AGREGAR</button>
+            <button onClick={(e) => agregarPaciente()} >AGREGAR</button>
         </div>
     </form>
   )

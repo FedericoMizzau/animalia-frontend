@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import PacientesBuscar from "./PacientesBuscar";
 import PacientesListado from "./PacientesListado";
+import PacientesRegistro from "./PacientesRegistro";
 
 const pacientes_test = [
   {
@@ -55,28 +56,122 @@ const pacientes_test = [
   },
 ];
 
+const pacienteInicial = {
+  id: 0,
+  nombre: "",
+  peso: 0,
+  fechaNacimiento: "",
+  esterilizado: false,
+  sexo: "",
+  idPropietario: null,
+  idEspecie: 0,
+};
+
 const Pacientes = () => {
   // Definicion de variables de estado.
   //   La accion es Consulta (C), Listado (L), Modificacion (M) o Registro (R) segun la funcionalidad
-  const [accion, setAccion] = useState("");
+  const [accion, setAccion] = useState("L");
   const [pacientes, setPacientes] = useState([]);
-  const [pacienteActual, setPacienteActual] = useState(null);
+  const [pacienteActual, setPacienteActual] = useState(pacienteInicial);
 
   // Variables de estado para los input de busqueda
   const [nombre, setNombre] = useState("");
   const [idPaciente, setIdPaciente] = useState(0);
 
-// cargar los pacientes por primera vez
+  // cargar los pacientes por primera vez
 
-useEffect(() => {
-  setPacientes(pacientes_test);
-  console.log(pacientes);
-}, [])
+  useEffect(() => {
+    setPacientes(pacientes_test);
+    console.log(pacientes);
+  }, []);
+
+  // useEffect para clogear los pacientes en cada update, solo para testing, sacar para implementacion
+
+  useEffect(() => {
+    console.log(pacientes);
+  
+    
+  }, [pacientes]);
+  
+  // funciones de busqueda
+
+  function buscarPacientePorId(id) {
+    let buscado = pacientes.find((pac) => pac.id === id);
+    if (buscado) return buscado;
+    else return;
+  }
+
+  function buscarPacientes() {
+    let filtrados = pacientes.filter((pac) => pac.nombre === nombre);
+    if (filtrados) setPacientes(filtrados);
+    return;
+  }
+
+  function agregarPaciente() {
+    setAccion("R");
+    setPacienteActual(pacienteInicial);
+  }
+
+  function consultarPaciente(id, accion) {
+    let buscado = buscarPacientePorId(id);
+    console.log(buscado);
+    setPacienteActual(buscado);
+    setAccion(accion);
+  }
+
+  function eliminarPaciente(id) {
+    let newPacientes = pacientes.filter((pac) => pac.id !== id);
+    setPacientes(newPacientes);
+  }
+
+  function regresarListado() {
+    setAccion("L");
+  }
+
+  function grabarPaciente(nuevoPaciente) {
+    setPacientes([
+      ...pacientes,
+      nuevoPaciente
+    ]);
+    // setPacienteActual(pacienteInicial);
+    regresarListado();
+  }
 
   return (
     <div>
-      <PacientesBuscar nombre={nombre} setNombre={setNombre} idPaciente={idPaciente} setIdPaciente={setIdPaciente}/>
-      <PacientesListado pacientes={pacientes} pacienteActual={pacienteActual} />
+      {accion === "L" && (
+        <PacientesBuscar
+          nombre={nombre}
+          setNombre={setNombre}
+          idPaciente={idPaciente}
+          setIdPaciente={setIdPaciente}
+          buscarPacientes={buscarPacientes}
+          agregarPaciente={agregarPaciente}
+        />
+      )}
+      {accion === "L" &&
+        (pacientes.length > 0 ? (
+          <PacientesListado
+            accion={accion}
+            setAccion={setAccion}
+            pacientes={pacientes}
+            pacienteActual={pacienteActual}
+            consultarPaciente={consultarPaciente}
+            eliminarPaciente={eliminarPaciente}
+          />
+        ) : (
+          <p>No se encontraron pacientes...</p>
+        ))}
+      {accion !== "L" && (
+        <PacientesRegistro
+          accion={accion}
+          setAccion={setAccion}
+          pacienteActual={pacienteActual}
+          setPacienteActual={setPacienteActual}
+          regresarListado={regresarListado}
+          grabarPaciente={grabarPaciente}
+        />
+      )}
     </div>
   );
 };
