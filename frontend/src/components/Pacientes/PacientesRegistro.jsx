@@ -1,16 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import { useForm } from "react-hook-form";
-
-// const initialForm = {
-//   id: 0,
-//   nombre: "",
-//   peso: 0,
-//   sexo: "M",
-//   fechaNac: "",
-//   esterilizado: false,
-//   idEspecie: 0,
-//   idPropietario: "",
-// };
+import Controles from "../Controles/Controles.jsx";
 
 const PacientesRegistro = ({
   accion,
@@ -18,6 +8,8 @@ const PacientesRegistro = ({
   grabarPaciente,
   regresarListado,
 }) => {
+  
+  const [controles, setControles] = useState([]);
   const {
     register,
     handleSubmit,
@@ -28,6 +20,10 @@ const PacientesRegistro = ({
     grabarPaciente(data);
   };
 
+  function obtenerControles(id) {
+// peticion a la api de controles
+  }
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -35,27 +31,27 @@ const PacientesRegistro = ({
         <h2>{accion === "C" ? "CONSULTAR" : "REGISTRAR"} PACIENTE</h2>
         <fieldset disabled={accion === "C"}>
           <div>
-            <label htmlFor="nombre">Nombre: </label>
+            <label htmlFor="Nombre">Nombre: </label>
             <input
               type="text"
-              {...register("nombre", {
+              {...register("Nombre", {
                 required: {
                   value: true,
-                  message: "El nombre es un campo requerido.",
+                  message: "El Nombre es un campo requerido.",
                 },
               })}
               autoFocus
             />
-            {errors?.nombre && touchedFields.nombre && (
-              <div>{errors?.nombre.message}</div>
+            {errors?.Nombre && touchedFields.Nombre && (
+              <div>{errors?.Nombre.message}</div>
             )}
           </div>
           <div>
-            <label htmlFor="sexo">Sexo: </label>
+            <label htmlFor="Sexo">Sexo: </label>
             <label>Macho </label>
             <input
               type="radio"
-              {...register("sexo", {
+              {...register("Sexo", {
                 required: {
                   value: true,
                   message: "Debe seleccionar un sexo para el paciente",
@@ -66,7 +62,7 @@ const PacientesRegistro = ({
             <label>Hembra </label>
             <input
               type="radio"
-              {...register("sexo", {
+              {...register("Sexo", {
                 required: {
                   value: true,
                   message: "Debe seleccionar un sexo para el paciente",
@@ -74,49 +70,49 @@ const PacientesRegistro = ({
               })}
               value="H"
             />
-            {errors?.sexo && touchedFields.sexo && (
-              <div>{errors?.sexo.message}</div>
+            {errors?.Sexo && touchedFields.Sexo && (
+              <div>{errors?.Sexo.message}</div>
             )}
           </div>
           <div>
-            <label htmlFor="peso">Peso: </label>
+            <label htmlFor="Peso">Peso: </label>
             <input
-              type="number"
-              {...register("peso", {
-                required: { value: true, message: "El peso es requerido" },
+              type="number" step="0.1"
+              {...register("Peso", {
+                required: { value: true, message: "El Peso es requerido" },
                 min: {
                   value: 0,
                   message: "El peso no puede ser un numero negativo.",
                 },
               })}
             />
-            {errors?.peso && touchedFields.peso && (
-              <div>{errors?.peso.message}</div>
+            {errors?.Peso && touchedFields.Peso && (
+              <div>{errors?.Peso.message}</div>
             )}
           </div>
           <div>
-            <label htmlFor="fechaNacimiento">Fecha de nacimiento: </label>
+            <label htmlFor="FechaNacimiento">Fecha de nacimiento: </label>
             <input
               type="date"
-              {...register("fechaNacimiento", {
+              {...register("FechaNacimiento", {
                 required: {
                   value: true,
                   message: "La fecha de nacimiento es requerida",
                 },
               })}
             />
-            {errors?.fechaNacimiento && touchedFields.fechaNacimiento && (
-              <div>{errors?.fechaNacimiento.message}</div>
+            {errors?.FechaNacimiento && touchedFields.FechaNacimiento && (
+              <div>{errors?.FechaNacimiento.message}</div>
             )}
           </div>
           <div>
-            <label htmlFor="esterilizado">¿Se encuentra esterilizado? </label>
-            <input type="checkbox" {...register("esterilizado")} />
+            <label htmlFor="Esterilizado">¿Se encuentra esterilizado? </label>
+            <input type="checkbox" {...register("Esterilizado")} />
           </div>
           <div>
-            <label htmlFor="idEspecie">Especie: </label>
+            <label htmlFor="Especie">Especie: </label>
             <select
-              {...register("idEspecie", {
+              {...register("Especie", {
                 required: {
                   value: true,
                   message: "La especie es un campo requerido",
@@ -128,16 +124,16 @@ const PacientesRegistro = ({
               <option value="1">Felino</option>
               <option value="2">Otros</option>
             </select>
-            {errors?.idEspecie && touchedFields.idEspecie && (
-              <div>{errors?.idEspecie.message}</div>
+            {errors?.Especie && touchedFields.Especie && (
+              <div>{errors?.Especie.message}</div>
             )}
           </div>
           <div>
-            <label htmlFor="idPropietario">Propietario: </label>
+            <label htmlFor="Propietarios_id">Propietario: </label>
             <input
               type="text"
-              name="idPropietario"
-              {...register("idPropietario", {
+              name="Propietarios_id"
+              {...register("Propietarios_id", {
                 required: {
                   value: true,
                   message: "Debe ingresarse un propietario",
@@ -149,8 +145,8 @@ const PacientesRegistro = ({
                 },
               })}
             />
-            {errors?.idPropietario && touchedFields.idPropietario && (
-              <div>{errors?.idPropietario.message}</div>
+            {errors?.Propietarios_id && touchedFields.Propietarios_id && (
+              <div>{errors?.Propietarios_id.message}</div>
             )}
           </div>
         </fieldset>
@@ -168,6 +164,9 @@ const PacientesRegistro = ({
           </div>
         )}
       </form>
+      {
+        accion !== "R" && (<Controles id={pacienteActual.id} />)
+      }
     </div>
   );
 };

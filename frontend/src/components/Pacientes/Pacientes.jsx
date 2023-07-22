@@ -6,64 +6,64 @@ import PacientesRegistro from "./PacientesRegistro";
 const pacientes_test = [
   {
     id: 1,
-    nombre: "Zlatan",
-    peso: 31,
-    fechaNacimiento: "2007-07-16",
-    esterilizado: true,
-    sexo: "M",
-    idPropietario: 1,
+    Nombre: "Zlatan",
+    Peso: 31,
+    FechaNacimiento: "2007-07-16",
+    Esterilizado: true,
+    Sexo: "M",
+    Propietarios_id: 1,
     idEspecie: 0,
   },
   {
     id: 2,
-    nombre: "Galo Panzon",
-    peso: 3,
-    fechaNacimiento: "2022-11-20",
-    esterilizado: true,
-    sexo: "M",
-    idPropietario: 2,
+    Nombre: "Galo Panzon",
+    Peso: 3,
+    FechaNacimiento: "2022-11-20",
+    Esterilizado: true,
+    Sexo: "M",
+    Propietarios_id: 2,
     idEspecie: 1,
   },
   {
     id: 3,
-    nombre: "Orion",
-    peso: 5,
-    fechaNacimiento: "2019-10-08",
-    esterilizado: true,
-    sexo: "M",
-    idPropietario: 2,
+    Nombre: "Orion",
+    Peso: 5,
+    FechaNacimiento: "2019-10-08",
+    Esterilizado: true,
+    Sexo: "M",
+    Propietarios_id: 2,
     idEspecie: 1,
   },
   {
     id: 4,
-    nombre: "Lola",
-    peso: 8,
-    fechaNacimiento: "2015-09-28",
-    esterilizado: false,
-    sexo: "H",
-    idPropietario: 3,
+    Nombre: "Lola",
+    Peso: 8,
+    FechaNacimiento: "2015-09-28",
+    Esterilizado: false,
+    Sexo: "H",
+    Propietarios_id: 3,
     idEspecie: 0,
   },
   {
     id: 5,
-    nombre: "Pepita",
-    peso: 1.5,
-    fechaNacimiento: "1996-01-01",
-    esterilizado: false,
-    sexo: "H",
-    idPropietario: 4,
+    Nombre: "Pepita",
+    Peso: 1.5,
+    FechaNacimiento: "1996-01-01",
+    Esterilizado: false,
+    Sexo: "H",
+    Propietarios_id: 4,
     idEspecie: 2,
   },
 ];
 
 const pacienteInicial = {
   id: 0,
-  nombre: "",
-  peso: 0,
-  fechaNacimiento: "",
-  esterilizado: false,
-  sexo: "",
-  idPropietario: null,
+  Nombre: "",
+  Peso: 0,
+  FechaNacimiento: "",
+  Esterilizado: false,
+  Sexo: "",
+  Propietarios_id: null,
   idEspecie: 0,
 };
 
@@ -102,7 +102,7 @@ const Pacientes = () => {
   }
 
   function buscarPacientes() {
-    let filtrados = pacientes.filter((pac) => pac.nombre === nombre);
+    let filtrados = pacientes.filter((pac) => pac.Nombre === nombre);
     if (filtrados) setPacientes(filtrados);
     return;
   }
@@ -129,10 +129,21 @@ const Pacientes = () => {
   }
 
   function grabarPaciente(nuevoPaciente) {
-    setPacientes([
-      ...pacientes,
-      nuevoPaciente
-    ]);
+    
+    let esNuevo = pacientes.find((pac) => pac.id === nuevoPaciente.id);
+    console.log(esNuevo);
+
+    if (esNuevo === undefined){
+      setPacientes([
+        ...pacientes,
+        nuevoPaciente
+      ]); 
+    } else {
+        let indicePacienteActualizado = pacientes.indexOf(esNuevo);
+        console.log(indicePacienteActualizado);
+        pacientes[indicePacienteActualizado] = nuevoPaciente;
+      }
+    
     // setPacienteActual(pacienteInicial);
     regresarListado();
   }

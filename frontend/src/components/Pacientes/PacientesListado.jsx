@@ -1,7 +1,14 @@
 import React from "react";
 import moment from "moment";
 
-const PacientesListado = ({ pacientes, pacienteActual, accion, setAccion, consultarPaciente, eliminarPaciente}) => {
+const PacientesListado = ({
+  pacientes,
+  pacienteActual,
+  accion,
+  setAccion,
+  consultarPaciente,
+  eliminarPaciente,
+}) => {
   return (
     <table>
       <thead>
@@ -22,9 +29,9 @@ const PacientesListado = ({ pacientes, pacienteActual, accion, setAccion, consul
           pacientes.map((p) => (
             <tr key={p.id}>
               <td>{p.id}</td>
-              <td>{p.nombre}</td>
-              <td>{moment(p.fechaNacimiento).format("DD/MM/YYYY")}</td>
-              <td>{p.idPropietario}</td>
+              <td>{p.Nombre}</td>
+              <td>{moment(p.FechaNacimiento).format("DD/MM/YYYY")}</td>
+              <td>{p.Propietarios_id}</td>
               <td>
                 <button onClick={(e) => consultarPaciente(p.id, "C")}>C</button>
                 <button onClick={(e) => consultarPaciente(p.id, "M")}>M</button>
