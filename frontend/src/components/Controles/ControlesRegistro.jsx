@@ -12,7 +12,7 @@ const ControlesRegistro = ({
   return (
     <form>
       <div>
-        <button>VOLVER</button>
+        <button onClick={(e) => regresar()}>VOLVER</button>
         <span>PACIENTE Nº {idPaciente}</span>
         {accionControl === "C" ? <span>CONTROL Nº {nroControl}</span> : ""}
       </div>

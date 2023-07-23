@@ -1,6 +1,30 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Controles from "../Controles/Controles.jsx";
+
+const controlesTest = [
+  {
+    id: 0,
+    Fecha: "10/03/2022",
+    Descripcion: "Vacunacion antiparasitaria 1ra dosis",
+    Animales_id: 2,
+    Activo: true,
+  },
+  {
+    id: 1,
+    Fecha: "21/02/2023",
+    Descripcion: "Control por enfermedad estomacal",
+    Animales_id: 2,
+    Activo: true,
+  },
+  {
+    id: 2,
+    Fecha: "15/03/2023",
+    Descripcion: "Vacunacion antiparasitaria 2da dosis",
+    Animales_id: 2,
+    Activo: true,
+  },
+];
 
 const PacientesRegistro = ({
   accion,
@@ -8,7 +32,6 @@ const PacientesRegistro = ({
   grabarPaciente,
   regresarListado,
 }) => {
-  
   const [controles, setControles] = useState([]);
   const {
     register,
@@ -21,7 +44,21 @@ const PacientesRegistro = ({
   };
 
   function obtenerControles(id) {
-// peticion a la api de controles
+    // peticion a la api de controles
+  }
+
+  // useEffect para cargar los controles del paciente actual consultado
+  useEffect(() => {
+    buscarControles(pacienteActual.id);
+  }, []);
+
+  function buscarControles(id) {
+    // cambiar por peticion a la api de controles
+    let controlesPacienteActual = controlesTest.filter(
+      (c) => c.Animales_id === id
+    );
+    console.log(controlesPacienteActual);
+    setControles(controlesPacienteActual);
   }
 
   return (
@@ -77,7 +114,8 @@ const PacientesRegistro = ({
           <div>
             <label htmlFor="Peso">Peso: </label>
             <input
-              type="number" step="0.1"
+              type="number"
+              step="0.1"
               {...register("Peso", {
                 required: { value: true, message: "El Peso es requerido" },
                 min: {
@@ -164,9 +202,7 @@ const PacientesRegistro = ({
           </div>
         )}
       </form>
-      {
-        accion !== "R" && (<Controles id={pacienteActual.id} />)
-      }
+      {accion !== "R" && <Controles controles={controles} setControles={setControles} />}
     </div>
   );
 };
