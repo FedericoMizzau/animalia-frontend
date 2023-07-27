@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import PacientesBuscar from "./PacientesBuscar";
 import PacientesListado from "./PacientesListado";
 import PacientesRegistro from "./PacientesRegistro";
+import HorizontalBar from "../HorizontalBar";
 
 const pacientes_test = [
   {
@@ -76,7 +77,7 @@ const Pacientes = () => {
 
   // Variables de estado para los input de busqueda
   const [nombre, setNombre] = useState("");
-  const [idPaciente, setIdPaciente] = useState(0);
+  const [idPaciente, setIdPaciente] = useState("");
 
   // cargar los pacientes por primera vez
 
@@ -149,7 +150,8 @@ const Pacientes = () => {
   }
 
   return (
-    <div>
+    <div className="container-fluid">
+      <div>
       {accion === "L" && (
         <PacientesBuscar
           nombre={nombre}
@@ -160,6 +162,9 @@ const Pacientes = () => {
           agregarPaciente={agregarPaciente}
         />
       )}
+      </div>
+      <HorizontalBar />
+      <div >
       {accion === "L" &&
         (pacientes.length > 0 ? (
           <PacientesListado
@@ -183,6 +188,7 @@ const Pacientes = () => {
           grabarPaciente={grabarPaciente}
         />
       )}
+      </div>
     </div>
   );
 };
