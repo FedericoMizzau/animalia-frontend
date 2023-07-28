@@ -1,0 +1,70 @@
+/* Estilos de componente listado */
+.table th {
+    text-align: center;
+}
+
+.table th,
+.table td {
+    padding: 0.25em 0.5em;
+}
+
+.table td {
+    font-size: var(--step--1);
+}
+
+.btn-opciones-pacientes {
+    margin: 0.25em 0 0 0.025em;
+    padding: 0.25em 0.6em;
+    color: #fff;
+    font-size: var(--step--2);
+    font-weight: bold;
+    border-radius: 50%;
+    border: thin solid var(--bs-border-color);
+}
+
+.btn-opciones-pacientes:hover {
+    filter: brightness(0.85);
+}
+
+.consultar {
+    background-color: #429628;
+}
+
+.modificar {
+    background-color: #104bb9;
+}
+
+.eliminar {
+    background-color: #db4040;
+}
+
+/* Estilos de componente buscar */
+.btn-buscar {
+    color: #fff !important;
+    max-width: 150px !important;
+    background-color: var(--dark-orange-1) !important;
+    transition: filter 0.5s 
+}
+
+.btn-buscar:hover {
+    filter: brightness(0.9);
+}
+
+.btn-agregar {
+    max-width: 150px !important;
+}
+
+.form-pacientes .input-numero, .input-nombre{
+    max-width: 100%;
+    padding: 0.25em;
+    border: thin solid #dee2e6;
+    border-radius: 0.25em;
+}
+
+  /* Media queries small  */
+@media screen and (min-width: 36em) {
+    .pacientes-buscar {
+        max-width: 40vw !important;
+    }  
+} 
+
