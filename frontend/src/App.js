@@ -4,6 +4,7 @@ import Inicio from './components/Login/Inicio';
 import Controles from './components/Controles/Controles';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import ModalDialog from './components/ModalDialog';
+import RequireAuth from './components/RequiereAuth';
 
 function App() {
   return (
@@ -12,9 +13,11 @@ function App() {
       <ModalDialog/>
           <div className="divBody">
             <Routes>
-              <Route path="/login:componentFrom" element={<Inicio/>} />
-              <Route path="*" element={<Navigate to="/login:componentFrom" replace />} /> 
-              <Route path="/pacientes" element={<Pacientes/>} /> 
+              <Route path="/login" element={<Inicio/>} />
+              <Route path="*" element={<Navigate to="/login" replace />} /> 
+
+              <Route path="/pacientes" element={<RequireAuth><Pacientes/></RequireAuth>}/> 
+
               <Route path="/controles" element={<Controles/>} /> 
             </Routes>
           </div>

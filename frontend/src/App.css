@@ -1,11 +1,11 @@
 .divBody {
   min-height: 100vh;
   padding: 1rem;
-  background-color: #555C34;
-  background: linear-gradient(to right, #C5652D, #DDA15E);
-  animation: gradientAnimation 10s linear infinite !important
+  background: linear-gradient(-25deg,#efe6d7, #dda15e,#C5652D, #b1b838
+  ,#555c34, #8d6b3f);
+  background-size: 300% 300%;
+  animation: animate 25s ease infinite;
 }
-
 
 :root {
     /* Variables de color */
@@ -78,9 +78,22 @@ body {
   }
 }
 
+@keyframes animate {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
   /* Media queries small  */
   @media screen and (min-width: 36em) {
     .horizontal-bar {
       border-top-width: thick;
     }
 } 
+
+

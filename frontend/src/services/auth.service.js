@@ -1,9 +1,6 @@
 import httpService from "./http.service";
 import { config } from "../config";
 import modalService from "./modalDialog.service";
-import Pacientes from "../components/Pacientes/Pacientes";
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import { PureComponent } from "react";
 
 const login = async (usuario, clave, navigateToComponent) => {
   let resp = await httpService.post(config.urlServidor + "/api/login", {
@@ -17,8 +14,7 @@ const login = async (usuario, clave, navigateToComponent) => {
     sessionStorage.setItem("refreshToken", resp.data.refreshToken);
     if (CambioUsuarioLogueado) CambioUsuarioLogueado(usuario);
     {
-      alert('hola')
-      navigateToComponent(<Pacientes></Pacientes>)
+      navigateToComponent();
     }
    
   } else {
