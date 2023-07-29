@@ -18,9 +18,9 @@ const PacientesBuscar = ({
     <form
       name="formBuscarPacientes"
       onSubmit={handleSearch}
-      className="form-buscar-pacientes mt-3"
+      className="form-buscar-pacientes mt-3 opacity-chg-low"
     >
-      <div className="container">
+      <div className="container ">
         <div className="row justify-content-center">
         <h2 className="title-buscar">BUSCAR PACIENTE</h2>
         </div>
