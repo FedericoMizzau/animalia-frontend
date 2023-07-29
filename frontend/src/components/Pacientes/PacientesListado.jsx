@@ -11,38 +11,66 @@ const PacientesListado = ({
   eliminarPaciente,
 }) => {
   return (
-    <table className="table table-warning">
-      <thead>
-        <tr>
-          <th>NRO</th>
-          <th>NOMBRE</th>
-          <th>FECHA NAC.</th>
-          <th>DUEÑO/A</th>
-          <th>OPCIONES</th>
-        </tr>
-      </thead>
-      <tbody>
-        {pacientes.length === 0 ? (
-          <tr>
-            <td>No se encontraron pacientes</td>
+    <div className="table-responsive-sm">
+      <table className="table table-warning table-hover">
+        <thead>
+          <tr className="align-middle">
+            <th>NRO</th>
+            <th>NOMBRE</th>
+            <th>FECHA NAC.</th>
+            <th>DUEÑO/A</th>
+            <th>OPCIONES</th>
           </tr>
-        ) : (
-          pacientes.map((p) => (
-            <tr key={p.id}>
-              <td>{p.id}</td>
-              <td>{p.Nombre}</td>
-              <td>{moment(p.FechaNacimiento).format("DD/MM/YYYY")}</td>
-              <td>{p.Propietarios_id}</td>
-              <td>
-                <button onClick={(e) => consultarPaciente(p.id, "C")} className="btn-opciones-pacientes consultar">C&nbsp;</button>
-                <button onClick={(e) => consultarPaciente(p.id, "M")} className="btn-opciones-pacientes modificar">M</button>
-                <button onClick={(e) => eliminarPaciente(p.id)} className="btn-opciones-pacientes eliminar">X&nbsp;</button>
-              </td>
+        </thead>
+        <tbody>
+          {pacientes.length === 0 ? (
+            <tr>
+              <td>No se encontraron pacientes</td>
             </tr>
-          ))
-        )}
-      </tbody>
-    </table>
+          ) : (
+            pacientes.map((p) => (
+              <tr key={p.id}>
+                <td>{p.id}</td>
+                <td>{p.Nombre}</td>
+                <td>{moment(p.FechaNacimiento).format("DD/MM/YYYY")}</td>
+                <td>{p.Propietarios_id}</td>
+                <td>
+                  <div className="row justify-content-center">
+                    <div className="col-3">
+                      <button
+                        onClick={(e) => consultarPaciente(p.id, "C")}
+                        className="btn-opciones-pacientes consultar"
+                      >
+                        {/* C&nbsp; */}
+                        <i className="bi bi-info-lg"></i>
+                      </button>
+                    </div>
+                    <div className="col-3">
+                      <button
+                        onClick={(e) => consultarPaciente(p.id, "M")}
+                        className="btn-opciones-pacientes modificar"
+                      >
+                        {/* M */}
+                        <i className="bi bi-pencil"></i>
+                      </button>
+                    </div>
+                    <div className="col-3">
+                      <button
+                        onClick={(e) => eliminarPaciente(p.id)}
+                        className="btn-opciones-pacientes eliminar"
+                      >
+                        {/* X&nbsp; */}
+                        <i className="bi bi-trash3"></i>
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

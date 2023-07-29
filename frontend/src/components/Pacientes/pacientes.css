@@ -1,3 +1,19 @@
+/* Estilos generales */
+
+.shadow-small {
+    box-shadow: var(--box-shadow-sm);
+}
+
+.shadow-regular {
+    box-shadow: var(--box-shadow);
+}
+
+input {
+    outline: none;
+    border: thin solid #dee2e6;
+    border-radius: 0.25em;
+}
+
 /* Estilos de componente listado */
 .table th {
     text-align: center;
@@ -13,13 +29,16 @@
 }
 
 .btn-opciones-pacientes {
+    width: var(--step-2);
+    height: var(--step-2);
     margin: 0.25em 0 0 0.025em;
-    padding: 0.25em 0.6em;
+    padding: 0 0.25rem;
     color: #fff;
     font-size: var(--step--2);
-    font-weight: bold;
     border-radius: 50%;
-    border: thin solid var(--bs-border-color);
+    border: none;
+    /* border: thin solid var(--bs-border-color); */
+    text-align: center;
 }
 
 .btn-opciones-pacientes:hover {
@@ -27,23 +46,24 @@
 }
 
 .consultar {
-    background-color: #429628;
+    background-color: var(--green-1);
 }
 
 .modificar {
-    background-color: #104bb9;
+    background-color: var(--dark-green-1);
 }
 
 .eliminar {
-    background-color: #db4040;
+    background-color: var(--brown-1);
 }
+
 
 /* Estilos de componente buscar */
 .btn-buscar {
     color: #fff !important;
     max-width: 150px !important;
     background-color: var(--dark-orange-1) !important;
-    transition: filter 0.5s 
+    transition: filter 0.5s;
 }
 
 .btn-buscar:hover {
@@ -54,17 +74,97 @@
     max-width: 150px !important;
 }
 
-.form-pacientes .input-numero, .input-nombre{
+.form-buscar-pacientes, .container-title-consulta {
+    padding: 0.75em 0.5em;
+    background-color: #444;
+    border-radius: 0.5em;
+    box-shadow: var(--box-shadow-sm);
+}
+
+.form-buscar-pacientes .input-nombre{
     max-width: 100%;
     padding: 0.25em;
+    font-size: var(--step--1);
+}
+
+.form-buscar-pacientes label[for="nombre"]{
+    padding: 0.25em 0;
+    font-size: var(--step--1);
+}
+
+.title-buscar, .title-consulta {
+    width: 100%;
+    margin-top: 0.25em !important;
+    padding: 0.25em 0.5em;
+    color: var(--orange-1);
+    font-size: var(--step-2);
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #00000080;
+    text-align: center;
+}
+
+/* Componente pacientesRegistro */
+
+.form-pacientes {
+    background-color: #66666630;
+    border-radius: 1em;
+}
+
+.form-pacientes .input-group {
+    /* width: clamp(50%, auto, 100%); */
+    font-size: var(--step--2);
+}
+
+.form-pacientes input[type="image"]{
+    max-width: 200px;
+    max-height: 200px;
+    margin-top: 0.5em;
+    border: none;
+}
+
+.form-pacientes .input-group input[type="text"],
+.form-pacientes .input-group input[type="number"],
+.form-pacientes .input-group input[type="date"]
+ {
+    padding: 0.25em 1em 0.25em 1em ;
+}
+
+.form-pacientes .input-group-text {
+    background-color: var(--white-1);
+    font-size: var(--step--1);
+    font-weight: bold;
+}
+
+.form-pacientes .input-group-span {
+    padding: 1em;
+    background-color: rgba(239,239,239,0.3);
+    font-weight: bold;
     border: thin solid #dee2e6;
     border-radius: 0.25em;
+}
+
+.form-pacientes .descripcion {
+    width: 65%;
+    height: clamp(5vh, 10vh, 20vh);
+    resize: none;
+
 }
 
   /* Media queries small  */
 @media screen and (min-width: 36em) {
     .pacientes-buscar {
-        max-width: 40vw !important;
-    }  
+        max-width: 50vw !important;
+    }
+    
+} 
+
+/* medium */
+@media screen and (min-width: 48em) {
+    .btn-opciones-pacientes {
+        width: 2em;
+        height: 2em;
+        font-size: var(--step-0);
+    }
+    
 } 
 
