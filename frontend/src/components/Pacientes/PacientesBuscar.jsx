@@ -5,8 +5,6 @@ import HorizontalBar from "../HorizontalBar";
 const PacientesBuscar = ({
   nombre,
   setNombre,
-  idPaciente,
-  setIdPaciente,
   buscarPacientes,
   agregarPaciente,
 }) => {
@@ -20,47 +18,30 @@ const PacientesBuscar = ({
     <form
       name="formBuscarPacientes"
       onSubmit={handleSearch}
-      className="form-pacientes"
+      className="form-buscar-pacientes mt-3"
     >
       <div className="container">
-        <h2>BUSCAR PACIENTE</h2>
-        <div className="row justify-content-start my-2">
-          <div className="col-6 col-md-3 gy-1">
-            <label htmlFor="idPaciente" className="form-label">
-              Numero de paciente:{" "}
-            </label>
-          </div>
-          <div className="col-6 col-md-2 gy-1">
-            <input
-              type="text"
-              name="idPaciente"
-              pattern="[0-9]+"
-              value={idPaciente}
-              onChange={(e) => {
-                setIdPaciente(e.target.value);
-              }}
-              className="input-numero"
-            />
-          </div>
-          <div className="col-6 col-md-2 col-lg-1 gy-1">
-            <label htmlFor="nombre" className="form-label">
+        <div className="row justify-content-center">
+        <h2 className="title-buscar">BUSCAR PACIENTE</h2>
+        </div>
+        <div className="row my-2">
+          {/* <div className="col-2 col-md-3 gy-1 gx-1">
+            <label htmlFor="nombre" className="form-label fw-bold text-uppercase">
               Nombre:{" "}
             </label>
-          </div>
-          <div className="col-6 col-md-2 col-lg-3 gy-1">
+          </div> */}
+          <div className="input-group col-auto gy-1">
             <input
               type="text"
               name="nombre"
-              placeholder="Nombre"
+              placeholder="Nombre del paciente"
               value={nombre}
               onChange={(e) => {
                 setNombre(e.target.value);
               }}
-              className="input-nombre"
+              className="input-nombre shadow-sm"
             />
-          </div>
-          <div className="col-auto ms-auto me-auto gy-1">
-            <button type="submit" className="btn btn-buscar me-3">  
+            <button type="submit" className="btn btn-buscar me-3 shadow-sm">  
             BUSCAR
             <i className="bi-search ms-1"></i>
             </button>
@@ -72,7 +53,7 @@ const PacientesBuscar = ({
         <div className="col-auto ms-auto me-auto">
           <button
             onClick={(e) => agregarPaciente()}
-            className="btn btn-success btn-agregar"
+            className="btn btn-success btn-agregar shadow-sm"
           >
             AGREGAR
             <i className="bi-plus-lg ms-1"></i>

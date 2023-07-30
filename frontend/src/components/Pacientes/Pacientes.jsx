@@ -3,11 +3,13 @@ import PacientesBuscar from "./PacientesBuscar";
 import PacientesListado from "./PacientesListado";
 import PacientesRegistro from "./PacientesRegistro";
 import HorizontalBar from "../HorizontalBar";
+import Header from "../Header/Header";
 
 const pacientes_test = [
   {
     id: 1,
     Nombre: "Zlatan",
+    Descripcion: "Perro de raza ovejero aleman, el pana zlatan",
     Peso: 31,
     FechaNacimiento: "2007-07-16",
     Esterilizado: true,
@@ -18,6 +20,7 @@ const pacientes_test = [
   {
     id: 2,
     Nombre: "Galo Panzon",
+    Descripcion: "Gato naranja ultra obeso, panzon, que molesta a la otra gata con la que convive y es adicto a las harinas ultraprocesadas, come facturas, criollos",
     Peso: 3,
     FechaNacimiento: "2022-11-20",
     Esterilizado: true,
@@ -28,6 +31,7 @@ const pacientes_test = [
   {
     id: 3,
     Nombre: "Orion",
+    Descripcion: "Gato blanco peludo lleno de cicatrices de guerra, tiene el maullido mas fino de la historia por lo que dudan de su sexualidad",
     Peso: 5,
     FechaNacimiento: "2019-10-08",
     Esterilizado: true,
@@ -38,6 +42,7 @@ const pacientes_test = [
   {
     id: 4,
     Nombre: "Lola",
+    Descripcion: "Perrita de tamaño mediano-chico, raza delba (del barrio pa), tambien le dicen Pongpong",
     Peso: 8,
     FechaNacimiento: "2015-09-28",
     Esterilizado: false,
@@ -48,6 +53,7 @@ const pacientes_test = [
   {
     id: 5,
     Nombre: "Pepita",
+    Descripcion: "Lora de tamaño mediano-grande y colores verdes con plumas amarillas en las alas, que sable hablar, muy inteligente",
     Peso: 1.5,
     FechaNacimiento: "1996-01-01",
     Esterilizado: false,
@@ -60,6 +66,7 @@ const pacientes_test = [
 const pacienteInicial = {
   id: 0,
   Nombre: "",
+  Descripcion: "",
   Peso: 0,
   FechaNacimiento: "",
   Esterilizado: false,
@@ -77,7 +84,6 @@ const Pacientes = () => {
 
   // Variables de estado para los input de busqueda
   const [nombre, setNombre] = useState("");
-  const [idPaciente, setIdPaciente] = useState("");
 
   // cargar los pacientes por primera vez
 
@@ -150,20 +156,20 @@ const Pacientes = () => {
   }
 
   return (
+  
     <div className="container-fluid">
       <div>
+        <Header></Header>
       {accion === "L" && (
         <PacientesBuscar
           nombre={nombre}
           setNombre={setNombre}
-          idPaciente={idPaciente}
-          setIdPaciente={setIdPaciente}
           buscarPacientes={buscarPacientes}
           agregarPaciente={agregarPaciente}
         />
       )}
       </div>
-      <HorizontalBar />
+      <HorizontalBar/>
       <div >
       {accion === "L" &&
         (pacientes.length > 0 ? (
