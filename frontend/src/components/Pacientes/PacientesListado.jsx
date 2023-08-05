@@ -12,7 +12,7 @@ const PacientesListado = ({
 }) => {
   return (
     <div className="table-responsive-sm opacity-chg-low">
-      <table className="table table-warning table-hover">
+      <table className="table table-warning table-hover pacientes-listado">
         <thead>
           <tr className="align-middle">
             <th>NRO</th>
@@ -30,12 +30,12 @@ const PacientesListado = ({
           ) : (
             pacientes.map((p) => (
               <tr key={p.id}>
-                <td>{p.id}</td>
+                <td className="fw-bold text-center">{p.id}</td>
                 <td>{p.Nombre}</td>
-                <td>{moment(p.FechaNacimiento).format("DD/MM/YYYY")}</td>
-                <td>{p.Propietarios_id}</td>
+                <td className="text-center">{moment(p.FechaNacimiento).format("DD/MM/YYYY")}</td>
+                <td className="fw-bold text-center">{p.Propietarios_id}</td>
                 <td>
-                  <div className="row justify-content-center">
+                  <div className="row justify-content-center align-items-center">
                     <div className="col-3">
                       <button
                         onClick={(e) => consultarPaciente(p.id, "C")}

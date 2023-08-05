@@ -1,13 +1,18 @@
 :root {
-    /* Variables de color */
+  /* Variables de color */
   --bs-border-color: #dee2e6;
   --white-1: #efe6d7;
   --orange-1: #dda15e;
   --dark-orange-1: #c5652d;
   --light-green-1: #b1b838;
   --green-1: #429628;
+  --green-2: #6fbe56;
   --dark-green-1: #555c34;
   --brown-1: #8d6b3f;
+  --dark-brown-1: #47351d;
+  --red-1: #9e2820;
+  --yellow-1: #dbce0f;
+
   /* Tamaños de letras fluidos */
   --step--2: clamp(0.69rem, calc(0.66rem + 0.18vw), 0.8rem);
   --step--1: clamp(0.83rem, calc(0.78rem + 0.29vw), 1rem);
@@ -18,8 +23,8 @@
   --step-4: clamp(2.07rem, calc(1.73rem + 1.7vw), 3.05rem);
   --step-5: clamp(2.49rem, calc(2.03rem + 2.31vw), 3.82rem);
   /* variables para sombreados */
-  --box-shadow:  0 .5rem 1rem rgba(0, 0, 0, 0.175);
-  --box-shadow-sm: 0 .125rem .25rem rgba(0, 0, 0, 0.175);
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+  --box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.175);
   --box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
 }
 
@@ -43,6 +48,131 @@ html {
   box-shadow: var(--box-shadow-sm);
 }
 
+.bg-white-1 {
+  background-color: var(--white-1) !important;
+}
+
+.bg-l-green-1 {
+  background-color: var(--light-green-1) !important;
+}
+
+.btn-buscar {
+  color: #fff !important;
+  background-color: var(--dark-orange-1) !important;
+  transition: filter 0.5s;
+}
+
+.btn-cancelar {
+  margin-right: auto;
+  margin-left: auto;
+  color: #fff !important;
+  background-color: var(--red-1) !important;
+  transition: filter 0.5s;
+}
+
+.btn-consultar {
+  color: #fff !important;
+  background-color: var(--green-1) !important;
+  transition: filter 0.5s;
+}
+
+.btn-grabar {
+  margin-right: auto;
+  margin-left: auto;
+  color: #000;
+  background-color: var(--light-green-1) !important;
+  transition: filter 0.5s;
+}
+
+.btn-modificar {
+  color: #fff !important;
+  background-color: var(--dark-green-1) !important;
+  transition: filter 0.5s;
+}
+
+.btn-eliminar {
+  color: #fff !important;
+  background-color: var(--brown-1) !important;
+  transition: filter 0.5s;
+}
+
+.btn-hover {
+  transition: filter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-hover:hover {
+  filter: brightness(0.9);
+}
+
+.font--2 {
+  font-size: var(--step--2) !important;
+}
+
+.font--1 {
+  font-size: var(--step--1) !important;
+}
+.font-0 {
+  font-size: var(--step-0) !important;
+}
+.font-1 {
+  font-size: var(--step-1) !important;
+}
+.font-2 {
+  font-size: var(--step-2) !important;
+}
+
+.text-shadow-small {
+  text-shadow: 1px 1px 2px #00000080;
+}
+
+.shadow-small {
+  box-shadow: var(--box-shadow-sm);
+}
+
+.shadow-regular {
+  box-shadow: var(--box-shadow);
+}
+
+input {
+  outline: none;
+  border: thin solid #dee2e6;
+  border-radius: 0.25em;
+}
+
+input:disabled, textarea:disabled {
+  color: #222 !important; 
+}
+
+.form-error {
+  padding: 1em 0;
+}
+
+.form-error .msg-error {
+  width: 100%;
+  box-shadow: var(--box-shadow-sm);
+}
+
+.form-error span{
+  font-size: var(--step-1);
+}
+
+.form-error i::before {
+  font-size: 150%;
+}
+
+.msg-error {
+  width: 80%;
+  padding: 0.5em 1em;
+  text-align: center;
+  color: #ffeded;
+  border-radius: 0.5em;
+  font-size: var(--step--1);
+}
+
+.msg-error i {
+  font-size: var(--step-1);
+}
+
 /* componente header */
 
 .header {
@@ -50,7 +180,7 @@ html {
 }
 
 .main-title {
-  font-family: 'Lobster', cursive;
+  font-family: "Lobster", cursive;
   transition: filter 0.2s ease-in-out;
 }
 
@@ -72,7 +202,7 @@ html {
 /* animaciones */
 
 body {
-  font-family: 'Roboto', sans-serif !important;
+  font-family: "Roboto", sans-serif !important;
   background: linear-gradient(180deg, var(--orange-1), #f1b973, #ffd1ac);
   background-size: 800% 800%;
   animation: gradientAnimation 20s linear infinite;
@@ -86,13 +216,12 @@ body {
 
 @keyframes opacity-change-low {
   0% {
-      opacity: 0.5;
+    opacity: 0.5;
   }
 
   100% {
-      opacity: 1;
+    opacity: 1;
   }
-
 }
 
 @keyframes gradientAnimation {
@@ -113,9 +242,9 @@ body {
   }
 }
 
-  /* Media queries small  */
-  @media screen and (min-width: 36em) {
-    .horizontal-bar {
-      border-top-width: thick;
-    }
-} 
+/* Media queries small  */
+@media screen and (min-width: 36em) {
+  .horizontal-bar {
+    border-top-width: thick;
+  }
+}
