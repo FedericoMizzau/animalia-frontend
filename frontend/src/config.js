@@ -4,13 +4,9 @@
 //const urlServidor = "https://webapi.pymes.net.ar"
 const urlServidor = "http://localhost:4000"
 
-const urlResourceArticulos = urlServidor + "/api/articulos";
-const urlResourceArticulosFamilias = urlServidor + "/api/articulosfamilias";
-const urlResourceArticulosJWT = urlServidor + "/api/jwt/articulos";
+const urlResourcePacientes = urlServidor + "/api/animales";
 
 export const config = {
     urlServidor,
-    urlResourceArticulos,
-    urlResourceArticulosFamilias,
-    urlResourceArticulosJWT,
+    urlResourcePacientes,
 }

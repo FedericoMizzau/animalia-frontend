@@ -3,12 +3,13 @@ import moment from "moment";
 import "./pacientes.css";
 
 const PacientesListado = ({
-  pacientes,
-  pacienteActual,
-  accion,
-  setAccion,
+  Items,
   consultarPaciente,
-  eliminarPaciente,
+  Pagina,
+  RegistrosTotal,
+  Paginas,
+  buscarPacientes,
+  Modificar
 }) => {
   return (
     <div className="table-responsive-sm opacity-chg-low">
@@ -23,12 +24,12 @@ const PacientesListado = ({
           </tr>
         </thead>
         <tbody>
-          {pacientes.length === 0 ? (
+          { Items && Items.length === 0 ? (
             <tr>
               <td>No se encontraron pacientes</td>
             </tr>
           ) : (
-            pacientes.map((p) => (
+            Items && Items.map((p) => (
               <tr key={p.id}>
                 <td>{p.id}</td>
                 <td>{p.Nombre}</td>
@@ -38,7 +39,7 @@ const PacientesListado = ({
                   <div className="row justify-content-center">
                     <div className="col-3">
                       <button
-                        onClick={(e) => consultarPaciente(p.id, "C")}
+                        onClick={(e) => consultarPaciente(p)}
                         className="btn-opciones-pacientes consultar"
                       >
                         {/* C&nbsp; */}
@@ -47,22 +48,22 @@ const PacientesListado = ({
                     </div>
                     <div className="col-3">
                       <button
-                        onClick={(e) => consultarPaciente(p.id, "M")}
+                        onClick={(e) => Modificar(p)}
                         className="btn-opciones-pacientes modificar"
                       >
                         {/* M */}
                         <i className="bi bi-pencil"></i>
                       </button>
                     </div>
-                    <div className="col-3">
+                    {/*<div className="col-3">
                       <button
-                        onClick={(e) => eliminarPaciente(p.id)}
+                        onClick={(e) => eliminarPaciente(p)}
                         className="btn-opciones-pacientes eliminar"
                       >
-                        {/* X&nbsp; */}
+                        
                         <i className="bi bi-trash3"></i>
                       </button>
-                    </div>
+                    </div>*/}
                   </div>
                 </td>
               </tr>
@@ -70,6 +71,29 @@ const PacientesListado = ({
           )}
         </tbody>
       </table>
+      <div className="paginador">
+        <div className="row">
+          <div className="col">
+            <span className="pyBadge">Registros: {RegistrosTotal}</span>
+          </div>
+          <div className="col text-center">
+            Pagina: &nbsp;
+            <select
+              value={Pagina}
+              onChange={(e) => {
+                buscarPacientes(e.target.value);
+              }}
+            >
+              {Paginas?.map((x) => (
+                <option value={x} key={x}>
+                  {x}
+                </option>
+              ))}
+            </select>
+            &nbsp; de {Paginas?.length}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

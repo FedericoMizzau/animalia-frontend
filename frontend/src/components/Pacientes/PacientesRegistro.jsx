@@ -28,16 +28,17 @@ const controlesTest = [
 
 const PacientesRegistro = ({
   accion,
-  pacienteActual,
-  grabarPaciente,
+  setAccion,
+  Item,
   regresarListado,
+  grabarPaciente,
 }) => {
   const [controles, setControles] = useState([]);
   const {
     register,
     handleSubmit,
     formState: { errors, touchedFields, isValid, isSubmitted },
-  } = useForm({ values: pacienteActual });
+  } = useForm({ values: Item });
 
   const onSubmit = (data) => {
     grabarPaciente(data);
@@ -49,7 +50,7 @@ const PacientesRegistro = ({
 
   // useEffect para cargar los controles del paciente actual consultado
   useEffect(() => {
-    buscarControles(pacienteActual.id);
+    buscarControles(Item.id);
   }, []);
 
   function buscarControles(id) {
@@ -231,10 +232,10 @@ const PacientesRegistro = ({
                 </div>
               </div>
               <div className="col-12 col-sm-6 col-lg-4 datos-propietarios align-self-center mx-auto">
-                <h4 className="medium-title text-center text-shadow-small">DATOS DE DUEÑO/A</h4>
+                <h4 className="medium-title text-center text-shadow-small">DATOS DEL RESPONSABLE</h4>
                 <div className="input-group">
                   <label className="input-group-text" htmlFor="Propietarios_id">
-                    Propietario:{" "}
+                    Responsable:{" "}
                   </label>
                   <input
                     type="text"

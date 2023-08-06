@@ -4,68 +4,9 @@ import PacientesListado from "./PacientesListado";
 import PacientesRegistro from "./PacientesRegistro";
 import HorizontalBar from "../HorizontalBar";
 import Header from "../Header/Header";
-
-const pacientes_test = [
-  {
-    id: 1,
-    Nombre: "Zlatan",
-    Descripcion: "Perro de raza ovejero aleman, el pana zlatan",
-    Peso: 31,
-    FechaNacimiento: "2007-07-16",
-    Esterilizado: true,
-    Sexo: "M",
-    Propietarios_id: 1,
-    idEspecie: 0,
-  },
-  {
-    id: 2,
-    Nombre: "Galo Panzon",
-    Descripcion:
-      "Gato naranja ultra obeso, panzon, que molesta a la otra gata con la que convive y es adicto a las harinas ultraprocesadas, come facturas, criollos",
-    Peso: 3,
-    FechaNacimiento: "2022-11-20",
-    Esterilizado: true,
-    Sexo: "M",
-    Propietarios_id: 2,
-    idEspecie: 1,
-  },
-  {
-    id: 3,
-    Nombre: "Orion",
-    Descripcion:
-      "Gato blanco peludo lleno de cicatrices de guerra, tiene el maullido mas fino de la historia por lo que dudan de su sexualidad",
-    Peso: 5,
-    FechaNacimiento: "2019-10-08",
-    Esterilizado: true,
-    Sexo: "M",
-    Propietarios_id: 2,
-    idEspecie: 1,
-  },
-  {
-    id: 4,
-    Nombre: "Lola",
-    Descripcion:
-      "Perrita de tamaño mediano-chico, raza delba (del barrio pa), tambien le dicen Pongpong",
-    Peso: 8,
-    FechaNacimiento: "2015-09-28",
-    Esterilizado: false,
-    Sexo: "H",
-    Propietarios_id: 3,
-    idEspecie: 0,
-  },
-  {
-    id: 5,
-    Nombre: "Pepita",
-    Descripcion:
-      "Lora de tamaño mediano-grande y colores verdes con plumas amarillas en las alas, que sable hablar, muy inteligente",
-    Peso: 1.5,
-    FechaNacimiento: "1996-01-01",
-    Esterilizado: false,
-    Sexo: "H",
-    Propietarios_id: 4,
-    idEspecie: 2,
-  },
-];
+import {pacientesService} from '../../services/pacientes.service'
+import modalDialogService from "../../services/modalDialog.service";
+import moment from "moment";
 
 const pacienteInicial = {
   id: 0,
@@ -86,77 +27,125 @@ const Pacientes = () => {
   const [pacientes, setPacientes] = useState([]);
   const [pacienteActual, setPacienteActual] = useState(pacienteInicial);
   const [busqueda, setBusqueda] = useState(false);
+  const [Pagina, setPagina] = useState(1);
+  const [Paginas, setPaginas] = useState([]);
+  const [RegistrosTotal, setRegistrosTotal] = useState(0);
+  const [Activo, setActivo] = useState("");
+  const [Items, setItems] = useState(null);
+  const [Item, setItem] = useState([]); // usado en BuscarporId (Modificar, Consultar)
+
 
   // Variables de estado para los input de busqueda
-  const [nombre, setNombre] = useState("");
+  const [Nombre, setNombre] = useState("");
 
   // cargar los pacientes por primera vez
 
   useEffect(() => {
-    setPacientesTest();
-    console.log(pacientes);
+    async function BuscarPacientes(_pagina) {
+      if (_pagina && _pagina !== Pagina) {
+        setPagina(_pagina);
+      }
+      // OJO Pagina (y cualquier estado...) se actualiza para el proximo render, para buscar usamos el parametro _pagina
+      else {
+        _pagina = Pagina;
+      }
+      modalDialogService.BloquearPantalla(true);
+      const data = await pacientesService.Buscar(Nombre, _pagina);
+      modalDialogService.BloquearPantalla(false)
+      setItems(data.Items);
+      setRegistrosTotal(data.RegistrosTotal);
+  
+      //generar array de las paginas para mostrar en select del paginador
+      const arrPaginas = [];
+      for (let i = 1; i <= Math.ceil(data.RegistrosTotal / 10); i++) {
+        arrPaginas.push(i);
+      }
+      setPaginas(arrPaginas);
+    }
+    BuscarPacientes();
+    return () => {
+      //console.log("unmounting Articulos");
+    };
   }, []);
 
   // useEffect para clogear los pacientes en cada update, solo para testing, sacar para implementacion
 
-  useEffect(() => {
-    console.log(pacientes);
-  }, [pacientes]);
+  //useEffect(() => {
+    //console.log(pacientes);
+  //}, [pacientes]);
 
   // funciones de busqueda
 
-  function setPacientesTest() {
-    setPacientes(pacientes_test);
+
+  async function buscarPacientePorId(item, accion) {
+    const data = await pacientesService.BuscarPorId(item);
+    setItem(data);
+    setAccion(accion)
   }
 
-  function buscarPacientePorId(id) {
-    let buscado = pacientes.find((pac) => pac.id === id);
-    if (buscado) return buscado;
-    else return;
-  }
+  async function buscarPacientes(_pagina) {
+    if (_pagina && _pagina !== Pagina) {
+      setPagina(_pagina);
+    }
+    // OJO Pagina (y cualquier estado...) se actualiza para el proximo render, para buscar usamos el parametro _pagina
+    else {
+      _pagina = Pagina;
+    }
+    modalDialogService.BloquearPantalla(true);
+    const data = await pacientesService.Buscar(Nombre, _pagina);
+    modalDialogService.BloquearPantalla(false);
+    setItems(data.Items);
+    setRegistrosTotal(data.RegistrosTotal);
 
-  function buscarPacientes() {
-    let filtrados = pacientes.filter((pac) => pac.Nombre === nombre);
-    if (filtrados) setPacientes(filtrados);
-    setBusqueda(true);
-    return;
+    //generar array de las paginas para mostrar en select del paginador
+    const arrPaginas = [];
+    for (let i = 1; i <= Math.ceil(data.RegistrosTotal / 10); i++) {
+      arrPaginas.push(i);
+    }
+    setPaginas(arrPaginas);
+  }
+  function Modificar(item) {
+    if (!item.Activo) {
+      alert("No puede modificarse un registro Inactivo.");
+      return;
+    }
+    buscarPacientePorId(item, "M"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
   }
 
   function agregarPaciente() {
-    setAccion("R");
-    setPacienteActual(pacienteInicial);
+    setAccion("A");
+    setItem({
+      id: 0,
+      Nombre: null,
+      Peso: 0,
+      Especie: null,
+      Esterilizado: false,
+      FechaNacimiento: moment(new Date()).format("DD-MM-YYYY"),
+      Foto: null, // formatear bien la fecha
+      Activo: true,
+      Sexo: null,
+      Propietarios_id: null
+    });
   }
 
-  function consultarPaciente(id, accion) {
-    let buscado = buscarPacientePorId(id);
-    console.log(buscado);
-    setPacienteActual(buscado);
-    setAccion(accion);
+  function consultarPaciente(item) {
+    buscarPacientePorId(item, "C")
   }
 
-  function eliminarPaciente(id) {
-    let newPacientes = pacientes.filter((pac) => pac.id !== id);
-    setPacientes(newPacientes);
-  }
+ // function eliminarPaciente(id) {
+  //  let newPacientes = pacientes.filter((pac) => pac.id !== id);
+  //  setPacientes(newPacientes);
+ // }
 
   function regresarListado() {
     setAccion("L");
-    setBusqueda(false);
-    setPacientesTest(); // SOLO PARA PRUEBA, REMOVER FUNCION
+    
+ // SOLO PARA PRUEBA, REMOVER FUNCION
   }
 
-  function grabarPaciente(nuevoPaciente) {
-    let esNuevo = pacientes.find((pac) => pac.id === nuevoPaciente.id);
-    console.log(esNuevo);
-
-    if (esNuevo === undefined) {
-      setPacientes([...pacientes, nuevoPaciente]);
-    } else {
-      let indicePacienteActualizado = pacientes.indexOf(esNuevo);
-      console.log(indicePacienteActualizado);
-      pacientes[indicePacienteActualizado] = nuevoPaciente;
-    }
-
+  async function grabarPaciente(item) {
+    await pacientesService.Grabar(item);
+    await buscarPacientes()
     // setPacienteActual(pacienteInicial);
     regresarListado();
   }
@@ -168,7 +157,7 @@ const Pacientes = () => {
         <Header></Header>
         {accion === "L" && (
           <PacientesBuscar
-            nombre={nombre}
+            Nombre={Nombre}
             setNombre={setNombre}
             buscarPacientes={buscarPacientes}
             agregarPaciente={agregarPaciente}
@@ -177,38 +166,40 @@ const Pacientes = () => {
       </div>
       <HorizontalBar />
       <div>
-        {accion === "L" &&
-          ( busqueda === false && pacientes.length > 0 ? (
-            <PacientesListado
-              accion={accion}
-              setAccion={setAccion}
-              pacientes={pacientes}
-              pacienteActual={pacienteActual}
-              consultarPaciente={consultarPaciente}
-              eliminarPaciente={eliminarPaciente}
-            />
-          ) : (
-            <div className="row">
-              <div className="col-auto col-md-12 mx-auto">
-                <h3>No se encontraron pacientes...</h3>
-              </div>
-              <div className="col-auto mx-auto">
-              <button
-                  onClick={() => regresarListado()}
-                  className="btn btn-volver shadow-small my-2"
-                >
-                  VOLVER
-                  <i className="bi bi-arrow-counterclockwise ms-1"></i>
-                </button>
-              </div>
-            </div>
-          ))}
+      {accion === "L" && Items?.length > 0 && <PacientesListado
+        {...{
+          Items,
+          consultarPaciente,
+          accion,
+          Pagina,
+          RegistrosTotal,
+          Paginas,
+          setAccion,
+          buscarPacientes,
+          Modificar
+        }}
+      />}
+      {accion === "L" && Items?.length === 0 && 
+      <div className="row">
+      <div className="col-auto col-md-12 mx-auto">
+        <h3>No se encontraron pacientes...</h3>
+      </div>
+      <div className="col-auto mx-auto">
+      <button
+          onClick={() => regresarListado()}
+          className="btn btn-volver shadow-small my-2"
+        >
+          VOLVER
+          <i className="bi bi-arrow-counterclockwise ms-1"></i>
+        </button>
+      </div>
+    </div>
+      }
         {accion !== "L" && (
           <PacientesRegistro
             accion={accion}
             setAccion={setAccion}
-            pacienteActual={pacienteActual}
-            setPacienteActual={setPacienteActual}
+            Item={Item}
             regresarListado={regresarListado}
             grabarPaciente={grabarPaciente}
           />

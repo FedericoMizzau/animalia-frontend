@@ -1,6 +1,7 @@
 import axios from "axios";
 import modalService from "./modalDialog.service";
 
+
 const httpService = axios.create({
   headers: {
     "Content-type": "application/json",
@@ -37,7 +38,7 @@ httpService.interceptors.response.use(
       error.message = "debe loguearse para acceder a esta funcionalidad";
     } else if (error.response.status === 403) {
       // no auntenticado
-      error.message = "usuario no autorizado para acceder a esta funcionalidad";
+      error.message = "Realize el login nuevamente";
     } else {
       error.message =
         error?.response?.data?.message ??
