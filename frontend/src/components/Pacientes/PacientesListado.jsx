@@ -11,7 +11,7 @@ const PacientesListado = ({
   eliminarPaciente,
 }) => {
   return (
-    <div className="table-responsive-sm">
+    <div className="table-responsive-sm opacity-chg-low">
       <table className="table table-warning table-hover">
         <thead>
           <tr className="align-middle">

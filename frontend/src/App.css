@@ -87,6 +87,23 @@ body {
   animation: gradientAnimation 20s linear infinite;
 }
 
+/* animaciones */
+
+.opacity-chg-low {
+  animation: opacity-change-low 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes opacity-change-low {
+  0% {
+      opacity: 0.5;
+  }
+
+  100% {
+      opacity: 1;
+  }
+
+}
+
 @keyframes gradientAnimation {
   0% {
     background-position: 0% 50%;
