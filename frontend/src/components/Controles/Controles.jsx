@@ -80,6 +80,7 @@ const Controles = ({ controles, setControles }) => {
   }
 
   function grabarControl(control) {
+    control.id = controles.length + 1; // autoincremental simulado
     setControles([...controles, control]);
     resetControlActual();
     regresar();

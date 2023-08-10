@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import Controles from "../Controles/Controles.jsx";
 import useScreensize from "../../hooks/useScreensize.js";
 import ErrorMessage from "../ErrorMessage.jsx";
+import Propietarios from "../Propietarios/Propietarios.jsx";
 
 const controlesTest = [
   {
@@ -36,6 +37,7 @@ const PacientesRegistro = ({
 }) => {
   const { width, height } = useScreensize();
   const [controles, setControles] = useState([]);
+  const [propietarioSeleccionado, setPropietarioSeleccionado] = useState(null);
   const {
     register,
     handleSubmit,
@@ -64,6 +66,10 @@ const PacientesRegistro = ({
     );
     console.log(controlesPacienteActual);
     setControles(controlesPacienteActual);
+  }
+
+  function seleccionarPropietario(id) {
+    setPropietarioSeleccionado(id);
   }
 
   return (
@@ -256,40 +262,40 @@ const PacientesRegistro = ({
                 <div className="row justify-content-center">
                   <div className="col-12">
                     <h4 className="medium-title text-center text-shadow-small">
-                      DATOS DE DUEÑO/A
+                      {accion === "R"
+                        ? "SELECCIONAR PROPIETARIO"
+                        : "DATOS DE PROPIETARIO"}
                     </h4>
                   </div>
                   <div className="col-12">
-                    <div className="input-group">
-                      <label
-                        className="input-group-text"
-                        htmlFor="Propietarios_id"
-                      >
-                        Propietario
-                      </label>
-                      <input
-                        className={width >= 1000 ? "w-25" : ""}
-                        type="text"
-                        name="Propietarios_id"
-                        {...register("Propietarios_id", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresarse un propietario",
-                          },
-                          min: {
-                            value: 0,
-                            message:
-                              "El valor de ID es incorrecto (ID es un numero mayor a 0)",
-                          },
-                        })}
-                      />
-                    </div>
-                    {errors?.Propietarios_id &&
-                      touchedFields.Propietarios_id && (
-                        <ErrorMessage
-                          message={errors?.Propietarios_id.message}
+                    <div className="row">
+                      <div className="input-group mt-2 mb-1">
+                        <label
+                          className="input-group-text"
+                          htmlFor="Propietarios_id"
+                        >
+                          Propietario
+                        </label>
+                        <input
+                          disabled
+                          className={width >= 1000 ? "w-25" : ""}
+                          type="text"
+                          name="Propietarios_id"
+                          {...register("Propietarios_id", {required: {
+                            value: true, message: "Se debe seleccionar un propietario."
+                          }})}
+                          value={propietarioSeleccionado}
                         />
-                      )}
+                      </div>
+                      <Propietarios
+                        accionPacientes={accion}
+                        seleccionarPropietario={seleccionarPropietario}
+                        pacienteActual={pacienteActual}
+                      />
+                      {errors?.Propietarios_id && (
+                      <ErrorMessage message={errors?.Propietarios_id.message} />
+                    )}
+                    </div>
                   </div>
                 </div>
               </div>

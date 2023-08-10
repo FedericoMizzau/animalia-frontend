@@ -149,6 +149,7 @@ const Pacientes = () => {
     console.log(esNuevo);
 
     if (esNuevo === undefined) {
+      nuevoPaciente.id = pacientes.length + 1; // autoincremental simulado
       setPacientes([...pacientes, nuevoPaciente]);
     } else {
       let indicePacienteActualizado = pacientes.indexOf(esNuevo);
