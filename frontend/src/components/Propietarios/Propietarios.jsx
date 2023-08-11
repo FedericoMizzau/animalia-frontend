@@ -132,11 +132,11 @@ const Propietarios = ({ accionPacientes, seleccionarPropietario, pacienteActual 
               </div>
               <div className="col-12 input-group my-1">
                 <label className="input-group-text fw-bold">@</label>
-                <input type="email" {...register("Email")} />
+                <input className="px-2" type="email" {...register("Email")} />
               </div>
               <div className="col-12 input-group mt-1">
                 <label className="input-group-text">Telefono</label>
-                <input type="tel" {...register("Telefono")} />
+                <input className="px-2" type="tel" {...register("Telefono")} />
               </div>
             </div>
             {accionPacientes === "R" && accionPropietarios === "R" && (

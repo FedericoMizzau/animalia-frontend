@@ -9,11 +9,15 @@ const DetallesRegistro = ({ regresar, grabarDetalle, detalleActual }) => {
     handleSubmit,
     formState: { errors, touchedFields, isValid, isSubmitted },
   } = useForm({ values: detalleActual });
-  const {width, height} = useScreensize();
+  const { width, height } = useScreensize();
+
+  const onSubmit = (data) => {
+    grabarDetalle(data);
+  };
 
   return (
     <div className="container-fluid p-0">
-      <form className="form-registro-detalle">
+      <form className="form-registro-detalle" onSubmit={handleSubmit(onSubmit)}>
         <div className="row">
           <h4 className="title-detalles-registro text-shadow-small shadow-small">
             AGREGAR TIPO DE CONTROL
@@ -66,9 +70,9 @@ const DetallesRegistro = ({ regresar, grabarDetalle, detalleActual }) => {
                   },
                 })}
               >
-                <option value="T">Tratamiento</option>
-                <option value="L">Lesion</option>
-                <option value="E">Estudio</option>
+                <option value="Tratamiento">Tratamiento</option>
+                <option value="Lesion">Lesion</option>
+                <option value="Estudio">Estudio</option>
               </select>
             </div>
             {errors?.Tipo && touchedFields.Tipo && (
@@ -78,7 +82,7 @@ const DetallesRegistro = ({ regresar, grabarDetalle, detalleActual }) => {
           <div className="col-12 text-center my-2">
             <button
               className="btn btn-grabar btn-hover shadow-small me-2"
-              onClick={(e) => grabarDetalle()}
+              type="submit"
             >
               GRABAR <i className="bi bi-check-lg ms-1"></i>
             </button>
@@ -92,10 +96,10 @@ const DetallesRegistro = ({ regresar, grabarDetalle, detalleActual }) => {
         </div>
       </form>
       {!isValid && isSubmitted && (
-            <div className="form-error">
-              <ErrorMessage message="Datos de tipo de control incorrectos." />
-            </div>
-          )}
+        <div className="form-error">
+          <ErrorMessage message="Datos de tipo de control incorrectos." />
+        </div>
+      )}
     </div>
   );
 };

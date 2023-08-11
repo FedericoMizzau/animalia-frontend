@@ -277,14 +277,16 @@ const PacientesRegistro = ({
                           Propietario
                         </label>
                         <input
-                          disabled
+                          value={propietarioSeleccionado}
+                          readOnly
                           className={width >= 1000 ? "w-25" : ""}
                           type="text"
-                          name="Propietarios_id"
-                          {...register("Propietarios_id", {required: {
-                            value: true, message: "Se debe seleccionar un propietario."
-                          }})}
-                          value={propietarioSeleccionado}
+                          {...register("Propietarios_id", {
+                            required: {
+                              value: true,
+                              message: "Se debe seleccionar un propietario.",
+                            },
+                          })}
                         />
                       </div>
                       <Propietarios
@@ -293,8 +295,10 @@ const PacientesRegistro = ({
                         pacienteActual={pacienteActual}
                       />
                       {errors?.Propietarios_id && (
-                      <ErrorMessage message={errors?.Propietarios_id.message} />
-                    )}
+                        <ErrorMessage
+                          message={errors?.Propietarios_id.message}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
