@@ -143,11 +143,25 @@ const Pacientes = () => {
  // SOLO PARA PRUEBA, REMOVER FUNCION
   }
 
-  async function grabarPaciente(item) {
+async function grabarPaciente(item) {
     await pacientesService.Grabar(item);
     await buscarPacientes()
-    // setPacienteActual(pacienteInicial);
+    setPacienteActual(pacienteInicial);
     regresarListado();
+}
+
+function grabarPaciente(nuevoPaciente) {
+    let esNuevo = pacientes.find((pac) => pac.id === nuevoPaciente.id);
+    console.log(esNuevo);
+
+    if (esNuevo === undefined) {
+      nuevoPaciente.id = pacientes.length + 1; // autoincremental simulado
+      setPacientes([...pacientes, nuevoPaciente]);
+    } else {
+      let indicePacienteActualizado = pacientes.indexOf(esNuevo);
+      console.log(indicePacienteActualizado);
+      pacientes[indicePacienteActualizado] = nuevoPaciente;
+    }
   }
 
   return (
@@ -202,6 +216,7 @@ const Pacientes = () => {
             Item={Item}
             regresarListado={regresarListado}
             grabarPaciente={grabarPaciente}
+            pacienteActual={pacienteActual}
           />
         )}
       </div>

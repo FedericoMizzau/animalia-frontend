@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import Detalles from "./Detalles/Detalles.jsx";
 import "./controles.css";
 import HorizontalBar from "../HorizontalBar.jsx";
+import ErrorMessage from "../ErrorMessage.jsx";
 
 const ControlesRegistro = ({
   accionControl,
@@ -88,11 +89,18 @@ const ControlesRegistro = ({
                 })}
               />
             </div>
+            {errors?.Fecha &&
+                      touchedFields.Fecha && (
+                        <ErrorMessage
+                          message={errors?.Fecha.message}
+                        />
+                      )}
             {accionControl !== "C" ? (
               <div className="row align-content-center text-center">
                 <div className="col-8 col-md-4 mx-auto">
                   <button
                     className="btn btn-grabar btn-hover shadow-small my-1"
+                    type="submit"
                     onClick={(e) => grabarControl()}
                   >
                     GRABAR
@@ -117,13 +125,18 @@ const ControlesRegistro = ({
               ""
             )}
           </div>
-          {accionControl === "C" && (
+        </fieldset>
+        {accionControl === "C" && (
             <>
               <HorizontalBar />
               <Detalles detalles={detallesActual} />
             </>
           )}
-        </fieldset>
+          {!isValid && isSubmitted && (
+            <div className="form-error">
+              <ErrorMessage message="Datos de control incorrectos." />
+            </div>
+          )}
       </form>
     </div>
   );
