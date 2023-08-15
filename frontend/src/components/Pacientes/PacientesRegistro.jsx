@@ -310,7 +310,7 @@ const PacientesRegistro = ({
             </div>
           </fieldset>
           {/* botones */}
-          <div className="row text-center">
+          <div className="botones-registro row text-center">
             <div className="col-6">
               {accion !== "C" && (
                 <button
