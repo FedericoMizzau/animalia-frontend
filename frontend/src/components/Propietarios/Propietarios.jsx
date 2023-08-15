@@ -56,7 +56,11 @@ const propietariosTest = [
   },
 ];
 
-const Propietarios = ({ accionPacientes, seleccionarPropietario, pacienteActual }) => {
+const Propietarios = ({
+  accionPacientes,
+  seleccionarPropietario,
+  pacienteActual,
+}) => {
   const [accionPropietarios, setAccionPropietarios] = useState("L");
   const [propietarios, setPropietarios] = useState(propietariosTest);
   const [propietarioActual, setPropietarioActual] =
@@ -91,12 +95,10 @@ const Propietarios = ({ accionPacientes, seleccionarPropietario, pacienteActual 
 
   // useEffect para cambiar la accion de propietario según la del paciente
   useEffect(() => {
-
     return () => {
-      if (accionPacientes === "C") consultarPropietario(pacienteActual.id, "C");      
-    }
-  }, [accionPacientes])
-  
+      if (accionPacientes === "C") consultarPropietario(pacienteActual.id, "C");
+    };
+  }, [accionPacientes]);
 
   return (
     <div className="container-fluid">
@@ -107,36 +109,48 @@ const Propietarios = ({ accionPacientes, seleccionarPropietario, pacienteActual 
           seleccionarPropietario={seleccionarPropietario}
         />
       )}
-      { accionPropietarios !== "L" && (
+      {accionPropietarios !== "L" && (
         <form className="form-propietarios" onSubmit={handleSubmit(onSubmit)}>
           <fieldset disabled={accionPacientes === "C"}>
             <div className="row">
-              <div className="col-12 input-group my-1">
-                <label className="input-group-text">Nombre</label>
-                <input
-                  type="text"
-                  {...register("Nombre", {
-                    required: {
-                      value: true,
-                      message: "El nombre del propietario es requerido.",
-                    },
-                  })}
-                />
+              <div className="col-12 col-md-6">
+                <div className="input-group my-1">
+                  <label className="input-group-text text-center">Nombre</label>
+                  <input
+                    type="text"
+                    {...register("Nombre", {
+                      required: {
+                        value: true,
+                        message: "El nombre del propietario es requerido.",
+                      },
+                    })}
+                  />
+                </div>
               </div>
               {errors?.Nombre && touchedFields.Nombre && (
                 <ErrorMessage message={errors?.Nombre} />
               )}
-              <div className="col-12 input-group my-1">
-                <label className="input-group-text">Apellido</label>
-                <input type="text" {...register("Apellido")} />
+              <div className="col-12 col-md-6">
+                <div className="input-group my-1">
+                  <label className="input-group-text">Apellido</label>
+                  <input type="text" {...register("Apellido")} />
+                </div>
               </div>
-              <div className="col-12 input-group my-1">
-                <label className="input-group-text fw-bold">@</label>
-                <input className="px-2" type="email" {...register("Email")} />
+              <div className="col-12 col-md-6">
+                <div className="col-12 input-group my-1">
+                  <label className="input-group-text fw-bold">@</label>
+                  <input className="px-4" type="email" {...register("Email")} />
+                </div>
               </div>
-              <div className="col-12 input-group mt-1">
-                <label className="input-group-text">Telefono</label>
-                <input className="px-2" type="tel" {...register("Telefono")} />
+              <div className="col-12 col-md-6">
+                <div className="col-12 input-group mt-1">
+                  <label className="input-group-text">Telefono</label>
+                  <input
+                    className="px-2"
+                    type="tel"
+                    {...register("Telefono")}
+                  />
+                </div>
               </div>
             </div>
             {accionPacientes === "R" && accionPropietarios === "R" && (

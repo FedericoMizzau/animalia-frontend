@@ -36,11 +36,11 @@ const PropietariosLista = ({
                 <td className="text-center align-middle">{p.Apellido}</td>
                 <td className="text-center align-middle">{p.Telefono}</td>
                 <td className="text-center align-middle">{p.Email}</td>
-                <td className="text-center align-middle">
+                <td className="text-center align-middle fw-bold">
                   {p.Activo ? "SI" : "NO"}
                 </td>
                 <td>
-                  <div className="row justify-content-start opciones-propietarios">
+                  <div className="row justify-content-start justify-content-lg-center opciones-propietarios">
                     <div className="col-10">
                       <button
                         className="btn btn-seleccionar bg-success btn-hover shadow-small"

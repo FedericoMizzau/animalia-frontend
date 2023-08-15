@@ -70,7 +70,7 @@ const pacienteInicial = {
   id: 0,
   Nombre: "",
   Descripcion: "",
-  Peso: 0,
+  Peso: null,
   FechaNacimiento: "",
   Esterilizado: false,
   Sexo: "",

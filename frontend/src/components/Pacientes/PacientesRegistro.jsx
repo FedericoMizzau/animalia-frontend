@@ -86,15 +86,15 @@ const PacientesRegistro = ({
         >
           {/* <form> */}
           <fieldset disabled={accion === "C"}>
-            <div className="row row-cols-md-2 row-cols-lg-3">
-              <div className="col-12 col-sm-6 col-lg-4 mb-2">
+            <div className="row row-cols-md-2">
+              <div className="col-12 col-sm-6 col-lg-6 mb-2">
                 {/* https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg?cs=srgb&dl=pexels-evg-kowalievska-1170986.jpg&fm=jpg */}
-                <div className="input-group mb-2">
+                <div className="input-group mb-2 w-100">
                   <input
                     type="image"
                     src="https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg?cs=srgb&dl=pexels-evg-kowalievska-1170986.jpg&fm=jpg"
                     alt="ImagenMascota"
-                    className="img-fluid rounded shadow-regular mx-auto"
+                    className="img-fluid rounded shadow-regular mx-auto imagen-paciente"
                   />
                   {accion === "R" ? (
                     <div className="input-group my-1">
@@ -119,12 +119,16 @@ const PacientesRegistro = ({
                 </div>
               </div>
               <div
-                className={`datos-paciente col-12 col-sm-6 col-lg-4 ${
-                  width >= 1000 ? `pt-2` : ``
+                className={`datos-paciente col-12 col-sm-6 col-lg-6 pt-2${
+                  width >= 1000 ? `pt-4` : ``
                 }`}
               >
-                <div className={`row ${width >= 1000 ? "gy-1" : ""}`}>
-                  <div className="input-group my-1">
+                <div className={`row ${width >= 1000 ? "gy-2 mt-2" : ""}`}>
+                  <div
+                    className={`input-group my-1 ${
+                      width >= 1000 ? "mt-2" : ""
+                    }`}
+                  >
                     {/* <label htmlFor="Nombre">Nombre: </label> */}
                     <span className="input-group-text">Nombre</span>
                     <input
@@ -183,6 +187,7 @@ const PacientesRegistro = ({
                     <span className="input-group-text">Peso</span>
                     {/* <label htmlFor="Peso">Peso: </label> */}
                     <input
+                      className="input-peso"
                       type="number"
                       step="0.1"
                       {...register("Peso", {
@@ -195,6 +200,7 @@ const PacientesRegistro = ({
                           message: "El peso no puede ser un numero negativo.",
                         },
                       })}
+                      placeholder="kg"
                     />
                     {errors?.Peso && touchedFields.Peso && (
                       <ErrorMessage message={errors?.Peso.message} />
@@ -246,7 +252,7 @@ const PacientesRegistro = ({
                         },
                       })}
                       defaultValue={0}
-                      className="p-2"
+                      className="p-2 select-especie"
                     >
                       <option value="0">Canino</option>
                       <option value="1">Felino</option>
@@ -258,8 +264,8 @@ const PacientesRegistro = ({
                   </div>
                 </div>
               </div>
-              <div className="col-12 col-sm-6 col-lg-4 datos-propietarios align-self-center mx-auto">
-                <div className="row justify-content-center">
+              <div className="col-12 col-sm-6 col-md-12 col-lg-12 datos-propietarios align-self-center mx-auto">
+                <div className="row">
                   <div className="col-12">
                     <h4 className="medium-title text-center text-shadow-small">
                       {accion === "R"
@@ -268,38 +274,36 @@ const PacientesRegistro = ({
                     </h4>
                   </div>
                   <div className="col-12">
-                    <div className="row">
-                      <div className="input-group mt-2 mb-1">
-                        <label
-                          className="input-group-text"
-                          htmlFor="Propietarios_id"
-                        >
-                          Propietario
-                        </label>
-                        <input
-                          value={propietarioSeleccionado}
-                          readOnly
-                          className={width >= 1000 ? "w-25" : ""}
-                          type="text"
-                          {...register("Propietarios_id", {
-                            required: {
-                              value: true,
-                              message: "Se debe seleccionar un propietario.",
-                            },
-                          })}
-                        />
-                      </div>
+                    <div className="input-group mt-2 mb-1 justify-content-center">
+                      <label
+                        className="input-group-text"
+                        htmlFor="Propietarios_id"
+                      >
+                        Propietario
+                      </label>
+                      <input
+                        value={propietarioSeleccionado}
+                        readOnly
+                        className={width >= 1000 ? "w-25" : ""}
+                        type="text"
+                        {...register("Propietarios_id", {
+                          required: {
+                            value: true,
+                            message: "Se debe seleccionar un propietario.",
+                          },
+                        })}
+                      />
+                    </div>
+                    <div className="col-12">
                       <Propietarios
                         accionPacientes={accion}
                         seleccionarPropietario={seleccionarPropietario}
                         pacienteActual={pacienteActual}
                       />
-                      {errors?.Propietarios_id && (
-                        <ErrorMessage
-                          message={errors?.Propietarios_id.message}
-                        />
-                      )}
                     </div>
+                    {errors?.Propietarios_id && (
+                      <ErrorMessage message={errors?.Propietarios_id.message} />
+                    )}
                   </div>
                 </div>
               </div>

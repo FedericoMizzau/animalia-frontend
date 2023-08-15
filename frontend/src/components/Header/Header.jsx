@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <nav className="navbar header shadow-small opacity-chg-low">
+    <nav className="navbar header shadow-small opacity-chg-low sticky-top">
       <div className="container-fluid justify-content-center">
         <div className="row">
           <div className="col-auto navbar-text align-middle">
