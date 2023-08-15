@@ -150,7 +150,7 @@ async function grabarPaciente(item) {
     regresarListado();
 }
 
-function grabarPaciente(nuevoPaciente) {
+/*function grabarPaciente(nuevoPaciente) {
     let esNuevo = pacientes.find((pac) => pac.id === nuevoPaciente.id);
     console.log(esNuevo);
 
@@ -163,7 +163,7 @@ function grabarPaciente(nuevoPaciente) {
       pacientes[indicePacienteActualizado] = nuevoPaciente;
     }
   }
-
+*/
   return (
   
     <div className="container-fluid">
