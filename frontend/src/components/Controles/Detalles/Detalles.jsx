@@ -22,6 +22,7 @@ const Detalles = ({ accionControl, detalles, setDetalles }) => {
 
   function grabarDetalle(detalle) {
     setDetalles([...detalles, detalle]);
+    setDetalleActual(detalleInicial);
     regresar();
   }
 

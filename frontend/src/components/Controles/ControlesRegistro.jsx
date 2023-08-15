@@ -89,19 +89,15 @@ const ControlesRegistro = ({
                 })}
               />
             </div>
-            {errors?.Fecha &&
-                      touchedFields.Fecha && (
-                        <ErrorMessage
-                          message={errors?.Fecha.message}
-                        />
-                      )}
+            {errors?.Fecha && touchedFields.Fecha && (
+              <ErrorMessage message={errors?.Fecha.message} />
+            )}
             {accionControl !== "C" ? (
               <div className="row align-content-center text-center">
                 <div className="col-8 col-md-4 mx-auto">
                   <button
                     className="btn btn-grabar btn-hover shadow-small my-1"
                     type="submit"
-                    onClick={(e) => grabarControl()}
                   >
                     GRABAR
                     <i className="bi bi-check-lg ms-1"></i>
@@ -127,16 +123,16 @@ const ControlesRegistro = ({
           </div>
         </fieldset>
         {accionControl === "C" && (
-            <>
-              <HorizontalBar />
-              <Detalles detalles={detallesActual} />
-            </>
-          )}
-          {!isValid && isSubmitted && (
-            <div className="form-error">
-              <ErrorMessage message="Datos de control incorrectos." />
-            </div>
-          )}
+          <>
+            <HorizontalBar />
+            <Detalles detalles={detallesActual} />
+          </>
+        )}
+        {!isValid && isSubmitted && (
+          <div className="form-error">
+            <ErrorMessage message="Datos de control incorrectos." />
+          </div>
+        )}
       </form>
     </div>
   );

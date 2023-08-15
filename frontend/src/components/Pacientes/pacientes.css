@@ -108,6 +108,7 @@
 .form-pacientes .input-group {
   /* width: clamp(50%, auto, 100%); */
   font-size: var(--step--2);
+
 }
 
 .form-pacientes input[type="image"] {
@@ -164,8 +165,19 @@
   outline: none;
 }
 
+.form-pacientes .input-peso::placeholder {
+  text-align: end;
+}
+
 .datos-propietarios {
   padding: 1em 0em 1em 0em;
+}
+
+.select-especie {
+  width: 40%;
+  outline: none;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25em;
 }
 
 /* Media queries small  */
@@ -177,6 +189,8 @@
 
 /* medium */
 @media screen and (min-width: 48em) {
+  
+  
   .btn-opciones-pacientes {
     width: 2em;
     height: 2em;
@@ -192,6 +206,13 @@
 
 }
 
+.btn-grabar,
+.btn-volver {
+  width: 12em !important;
+  height: 4em !important;
+  font-weight: bold !important;
+}
+
 /* large */
 
 @media screen and (min-width: 62em) {
@@ -203,8 +224,8 @@
 
     .datos-propietarios {
     padding: 0.25em;
-    height: 14em;
-    border-left: 0.15em solid #66666680;
+    /* height: 14em; */
+    /* border-left: 0.15em solid #66666680; */
   }
 
   .form-pacientes .input-group,

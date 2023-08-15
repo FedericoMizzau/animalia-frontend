@@ -1,15 +1,35 @@
 /* Estilos componente PropietariosLista */
 
-.lista-propietarios th{
-    color: var(--white-1) !important;
+.lista-propietarios th {
+  color: var(--white-1) !important;
 }
 
 .btn-seleccionar {
-    color: #fff !important;
-    font-size: var(--step--2) !important;
-    border-radius: 0.5em !important;
+  color: #fff !important;
+  font-size: var(--step--2) !important;
+  border-radius: 0.5em !important;
 }
 
 .opciones-propietarios {
-    padding: 0.5em;
+  padding: 0.5em;
+}
+
+@media screen and (min-width: 62em) {
+  .opciones-propietarios {
+    justify-content: space-evenly !important;
+    padding: 0;
+    max-width: 10em !important;
+  }
+
+  .opciones-propietarios .btn {
+    margin-top: 0.4em !important;
+  }
+
+  .form-propietarios .input-group input {
+    width: 80%;
+  }
+
+  .form-propietarios .input-group-text {
+    width: 20%;
+  }
 }

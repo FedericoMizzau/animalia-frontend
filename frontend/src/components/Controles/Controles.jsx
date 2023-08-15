@@ -80,9 +80,19 @@ const Controles = ({ controles, setControles }) => {
   }
 
   function grabarControl(control) {
-    control.id = controles.length + 1; // autoincremental simulado
-    setControles([...controles, control]);
-    resetControlActual();
+
+    let busq = buscarControl(control.id);
+
+    if (busq === undefined) {
+      control.id = controles.length + 1; // autoincremental simulado
+      control.Activo = true; // poner en activo el control por defecto
+      setControles([...controles, control]);
+      resetControlActual();
+    } else {
+      let ind = controles.findIndex((ctrl) => ctrl.id = control.id);
+      controles[ind] = control;
+    }
+  
     regresar();
   }
 
