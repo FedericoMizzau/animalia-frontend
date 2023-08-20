@@ -17,7 +17,6 @@ const ControlesListado = ({
             <th>FECHA</th>
             <th>DESCRIPCION</th>
             <th>ACTIVO</th>
-            <th>VER</th>
             <th>OPCIONES</th>
           </tr>
         </thead>
@@ -30,19 +29,7 @@ const ControlesListado = ({
               <td className="align-middle text-center fw-bold font-1">
                 {control.Activo ? "SI" : "NO"}
               </td>
-              <td>
-                <div className="row align-middle text-center container-botones">
-                  <div className="col-12 col-lg-4">
-                    <button className="btn btn-tratamiento fw-bold shadow-small btn-hover">T</button>
-                  </div>
-                  <div className="col-12 col-lg-4">
-                    <button className="btn btn-lesion fw-bold shadow-small  btn-hover">L</button>
-                  </div>
-                  <div className="col-12 col-lg-4">
-                    <button className="btn btn-estudio fw-bold shadow-small btn-hover">E</button>
-                  </div>
-                </div>
-              </td>
+            
               <td>
                 <div className="row align-middle text-center container-botones">
                   <div className="col-12 col-lg-4">

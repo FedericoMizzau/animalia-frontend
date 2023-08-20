@@ -25,8 +25,6 @@ function App() {
               </RequireAuth>
             }
           />
-
-          <Route path="/controles" element={<Controles />} />
         </Routes>
       </BrowserRouter>
     </>

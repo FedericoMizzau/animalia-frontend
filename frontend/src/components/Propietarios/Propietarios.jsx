@@ -65,8 +65,7 @@ const Propietarios = ({
   regresarRegistroPaciente,
 }) => {
   const [propietarios, setPropietarios] = useState(propietariosTest);
-  const [propietarioActual, setPropietarioActual] =
-    useState(propietarioInicial);
+  const [propietarioActual, setPropietarioActual] = useState(propietarioInicial);
   const {
     register,
     handleSubmit,

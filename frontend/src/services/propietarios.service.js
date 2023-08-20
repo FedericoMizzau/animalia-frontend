@@ -1,14 +1,7 @@
 import {config} from "../config";
 import httpService from "./http.service";
 
-const urlResource = config.urlResourcePacientes;
-
-async function Buscar(Nombre, Pagina) {
-  const resp = await httpService.get(urlResource, {
-    params: { Nombre, Pagina },
-  });
-  return resp.data;
-}
+const urlResource = config.urlResourcePropietarios;
 
 async function BuscarPorId(item) {
   const resp = await httpService.get(urlResource + "/" + item.id);
@@ -27,6 +20,6 @@ async function Grabar(item) {
   }
 }
 
-export const pacientesService = {
-  Buscar,BuscarPorId,ActivarDesactivar,Grabar
+export const propietariosService = {
+  BuscarPorId,ActivarDesactivar,Grabar
 };
