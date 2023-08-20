@@ -58,10 +58,12 @@ const propietariosTest = [
 
 const Propietarios = ({
   accionPacientes,
+  accionPropietarios,
+  setAccionPropietarios,
   seleccionarPropietario,
   pacienteActual,
+  regresarRegistroPaciente
 }) => {
-  const [accionPropietarios, setAccionPropietarios] = useState("L");
   const [propietarios, setPropietarios] = useState(propietariosTest);
   const [propietarioActual, setPropietarioActual] =
     useState(propietarioInicial);
@@ -89,6 +91,11 @@ const Propietarios = ({
     setAccionPropietarios("L");
   }
 
+  function agregarPropietario(){
+    setPropietarioActual(propietarioInicial);
+    setAccionPropietarios("R");
+  }
+
   const onSubmit = (data) => {
     grabarPropietario(data);
   };
@@ -101,7 +108,16 @@ const Propietarios = ({
   }, [accionPacientes]);
 
   return (
-    <div className="container-fluid">
+    <div className="propietarios-container container-fluid opacity-chg-low my-2 shadow-small">
+      {accionPropietarios === "L" && (<div className="row agregar-propietarios mt-2">
+        <div className="col-12 text-center my-1">
+          <button type="button" className="btn btn-agregar btn-success shadow-small" 
+          onClick={(e) => agregarPropietario()}>
+            AGREGAR PROPIETARIO
+            <i className="bi bi-plus-lg ms-2"></i>
+          </button>
+        </div>
+      </div>)}
       {accionPacientes === "R" && accionPropietarios === "L" && (
         <PropietariosLista
           propietarios={propietarios}
@@ -110,7 +126,10 @@ const Propietarios = ({
         />
       )}
       {accionPropietarios !== "L" && (
-        <form className="form-propietarios" onSubmit={handleSubmit(onSubmit)}>
+        <form className="form-propietarios opacity-chg-low" onSubmit={handleSubmit(onSubmit)}>
+          <div className="row container-title-registro my-1">
+            <h3 className="title-registrar-propietario text-shadow-small">REGISTRAR PROPIETARIO</h3>
+          </div>
           <fieldset disabled={accionPacientes === "C"}>
             <div className="row">
               <div className="col-12 col-md-6">
@@ -153,16 +172,16 @@ const Propietarios = ({
                 </div>
               </div>
             </div>
-            {accionPacientes === "R" && accionPropietarios === "R" && (
-              <div className="row">
-                <div className="col-6">
+            {accionPropietarios === "R" && (
+              <div className="row justify-content-center my-3">
+                <div className="col-6 mx-auto text-center">
                   <button className="btn btn-grabar btn-hover shadow-small">
                     GRABAR
                     <i className="bi bi-check-lg ms-1"></i>
                   </button>
                 </div>
-                <div className="col-6">
-                  <button className="btn btn-cancelar btn-hover shadow-small">
+                <div className="col-6 mx-auto text-center">
+                  <button type="button" onClick={(e) => regresarRegistroPaciente()} className="btn btn-cancelar btn-hover shadow-small">
                     CANCELAR
                     <i className="bi bi-x-lg ms-2"></i>
                   </button>
