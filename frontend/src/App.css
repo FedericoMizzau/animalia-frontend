@@ -165,8 +165,9 @@ input:disabled, textarea:disabled {
   padding: 0.5em 1em;
   text-align: center;
   color: #ffeded;
-  border-radius: 0.5em;
   font-size: var(--step--1);
+  border-radius: 0.5em;
+  background-color: var(--red-1) !important;
 }
 
 .msg-error i {

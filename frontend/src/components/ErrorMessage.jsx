@@ -3,7 +3,7 @@ import React from "react";
 const ErrorMessage = ({ message }) => {
   return (
     <div className="container-fluid">
-      <div className="row msg-error bg-danger mx-auto mt-1">
+      <div className="row msg-error mx-auto mt-1">
         <div className="col-8">
           <span className="">{message}</span>
         </div>

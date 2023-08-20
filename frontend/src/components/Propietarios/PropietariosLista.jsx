@@ -43,7 +43,7 @@ const PropietariosLista = ({
                   <div className="row justify-content-start justify-content-lg-center opciones-propietarios">
                     <div className="col-10">
                       <button
-                        className="btn btn-seleccionar bg-success btn-hover shadow-small"
+                        className="btn btn-seleccionar btn-success btn-hover shadow-small"
                         onClick={(e) => {
                           e.preventDefault();
                           seleccionarPropietario(p.id);
