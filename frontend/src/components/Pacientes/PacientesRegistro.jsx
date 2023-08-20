@@ -319,7 +319,7 @@ const PacientesRegistro = ({
                   {accion !== "C" && (
                     <button
                       type="submit"
-                      className="btn btn-grabar my-2 shadow-small"
+                      className="btn btn-grabar btn-hover my-2 shadow-small"
                     >
                       GRABAR <i className="bi bi-check-lg ms-1"></i>
                     </button>
@@ -328,7 +328,7 @@ const PacientesRegistro = ({
                 <div className={accion === "C" ? "col-12" : "col-6"}>
                   <button
                     onClick={(e) => regresarListado()}
-                    className="btn btn-volver shadow-small my-2"
+                    className="btn btn-volver shadow-small my-2 btn-hover"
                   >
                     {accion === "C" ? "VOLVER A LISTADO" : "CANCELAR"}
                     {accion === "C" ? (
@@ -348,19 +348,6 @@ const PacientesRegistro = ({
             </form>
           </div>
         </>
-      )}
-      <div className="row">
-        <Propietarios
-          accionPropietarios={accionPropietarios}
-          setAccionPropietarios={setAccionPropietarios}
-          regresarRegistroPaciente={regresarRegistroPaciente}
-          accionPacientes={accion}
-          seleccionarPropietario={seleccionarPropietario}
-          pacienteActual={pacienteActual}
-        />
-      </div>
-      {errors?.Propietarios_id && (
-        <ErrorMessage message={errors?.Propietarios_id.message} />
       )}
       <div className="row">
         {accion === "C" && (

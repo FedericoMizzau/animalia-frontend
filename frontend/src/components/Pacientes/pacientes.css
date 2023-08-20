@@ -70,14 +70,14 @@
 
 .form-buscar-pacientes,
 .container-title-consulta {
-  padding: 0.75em 0.5em;
+  padding: 0;
   background-color: #444;
   border-radius: 0.5em;
   box-shadow: var(--box-shadow-sm);
 }
 
 .form-buscar-pacientes .input-nombre {
-  max-width: 100%;
+  /* max-width: 100%; */
   padding: 0.25em;
   font-size: var(--step--1);
 }
@@ -90,9 +90,9 @@
 .title-buscar, .title-consulta {
     width: 100%;
     margin-top: 0.25em !important;
-    padding: 0.25em 0.5em;
+    padding: 0.25em;
     color: var(--dark-orange-1);
-    font-size: var(--step-2);
+    font-size: var(--step-1);
     font-weight: bold;
     text-shadow: 1px 1px 2px #00000080;
     text-align: center;
@@ -224,6 +224,7 @@
 /* large */
 
 @media screen and (min-width: 62em) {
+
   .botones-registro > .btn-grabar,
   .botones-registro > .btn-volver {
     max-width: 180px !important;
