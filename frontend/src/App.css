@@ -1,9 +1,9 @@
 .divBody {
   min-height: 100vh;
   padding: 1rem;
-  background: linear-gradient(-35deg,#efe6d7, #dda15e,#C5652D,  #8d6b3f);
+  background: linear-gradient(-35deg,#efe6d7, #dda15e,#C5652D,  #8d6b3f,#429628, #b1b838);
   background-size: 300% 300%;
-  animation: animate 30s ease infinite;
+  animation: animate 10s ease infinite;
 }
 
 :root {
