@@ -1,11 +1,3 @@
-.divBody {
-  min-height: 100vh;
-  padding: 1rem;
-  background: linear-gradient(-35deg,#efe6d7, #dda15e,#C5652D,  #8d6b3f,#429628, #b1b838);
-  background-size: 300% 300%;
-  animation: animate 10s ease infinite;
-}
-
 :root {
   /* Variables de color */
   --bs-border-color: #dee2e6;
@@ -184,7 +176,7 @@ input:disabled, textarea:disabled {
 /* componente header */
 
 .header {
-  background-color: var(--dark-orange-1);
+  background-color: var(--orange-1);
 }
 
 .main-title {
@@ -211,9 +203,12 @@ input:disabled, textarea:disabled {
 
 body {
   font-family: "Roboto", sans-serif !important;
-  background: linear-gradient(180deg, var(--orange-1), #f1b973, #ffd1ac);
+  /* background: linear-gradient(180deg, var(--orange-1), #f1b973, #ffd1ac);
   background-size: 800% 800%;
-  animation: gradientAnimation 20s linear infinite;
+  animation: gradientAnimation 20s linear infinite; */
+  background: linear-gradient(-35deg,#efe6d7, #dda15e,#C5652D,  #8d6b3f);
+  background-size: 300% 300%;
+  animation: animate 30s ease infinite;
 }
 
 /* animaciones */

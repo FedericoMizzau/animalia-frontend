@@ -1,7 +1,8 @@
 import React  from "react";
-import './Inicio.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import './Inicio.css';
+import "../../App.css";
+import 'bootstrap/dist/js/bootstrap.min.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from "react";
 import {  useNavigate } from "react-router-dom";
 
@@ -35,7 +36,7 @@ useEffect(() => {
 
     return(
 
-        <div className= "container w-100  mt-5 rounded shadow">
+        <div className= "container w-100  mt-5 rounded shadow opacity-chg-low">
             <div className= "row align-items-stretch">
               <div className="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded-start">
               </div>
@@ -53,7 +54,7 @@ useEffect(() => {
                     onChange={(e) => setClave(e.target.value)} value={clave}/>
                   </div>
                   <div className="d-grid mb-4">
-                    <button type="button" className="btn btn-dark" onClick={(e) => handleIngresar()}>Iniciar Sesion</button>
+                    <button type="button" className="btn btn-dark shadow-small p-2" onClick={(e) => handleIngresar()}>INICIAR SESION</button>
                   </div>
                 </form>
               </div>

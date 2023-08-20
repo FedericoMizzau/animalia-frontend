@@ -24,6 +24,7 @@ const Pacientes = () => {
   // Definicion de variables de estado.
   //   La accion es Consulta (C), Listado (L), Modificacion (M) o Registro (R) segun la funcionalidad
   const [accion, setAccion] = useState("L");
+  const [accionPropietarios, setAccionPropietarios] = useState("L");
   const [pacientes, setPacientes] = useState([]);
   const [pacienteActual, setPacienteActual] = useState(pacienteInicial);
   const [busqueda, setBusqueda] = useState(false);
@@ -117,7 +118,7 @@ const Pacientes = () => {
     setItem({
       id: 0,
       Nombre: null,
-      Peso: 0,
+      Peso: null,
       Especie: null,
       Esterilizado: false,
       FechaNacimiento: moment(new Date()).format("DD-MM-YYYY"),
@@ -168,7 +169,6 @@ async function grabarPaciente(item) {
   
     <div className="container-fluid">
       <div>
-        <Header></Header>
         {accion === "L" && (
           <PacientesBuscar
             Nombre={Nombre}
@@ -213,6 +213,8 @@ async function grabarPaciente(item) {
           <PacientesRegistro
             accion={accion}
             setAccion={setAccion}
+            accionPropietarios={accionPropietarios}
+            setAccionPropietarios={setAccionPropietarios}
             Item={Item}
             regresarListado={regresarListado}
             grabarPaciente={grabarPaciente}

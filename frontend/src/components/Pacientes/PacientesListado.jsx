@@ -9,11 +9,11 @@ const PacientesListado = ({
   RegistrosTotal,
   Paginas,
   buscarPacientes,
-  Modificar
+  Modificar,
 }) => {
   return (
     <div className="table-responsive-sm opacity-chg-low">
-      <table className="table table-warning table-hover pacientes-listado">
+      <table className="table table-warning table-hover pacientes-listado shadow-small">
         <thead>
           <tr className="align-middle">
             <th>NRO</th>
@@ -24,16 +24,19 @@ const PacientesListado = ({
           </tr>
         </thead>
         <tbody>
-          { Items && Items.length === 0 ? (
+          {Items && Items.length === 0 ? (
             <tr>
               <td>No se encontraron pacientes</td>
             </tr>
           ) : (
-            Items && Items.map((p) => (
+            Items &&
+            Items.map((p) => (
               <tr key={p.id}>
                 <td className="fw-bold text-center">{p.id}</td>
                 <td>{p.Nombre}</td>
-                <td className="text-center">{moment(p.FechaNacimiento).format("DD/MM/YYYY")}</td>
+                <td className="text-center">
+                  {moment(p.FechaNacimiento).format("DD/MM/YYYY")}
+                </td>
                 <td className="fw-bold text-center">{p.Propietarios_id}</td>
                 <td>
                   <div className="row justify-content-center align-items-center">
@@ -70,30 +73,32 @@ const PacientesListado = ({
             ))
           )}
         </tbody>
+        <caption>
+          <div className="paginador row">
+            <div className="col-6 text-center">
+              <span><b>Registros:</b> {RegistrosTotal}</span>
+            </div>
+            <div className="col-6 text-center">
+              <span>
+                <b>Pagina:</b> &nbsp;
+              </span>
+              <select
+                value={Pagina}
+                onChange={(e) => {
+                  buscarPacientes(e.target.value);
+                }}
+              >
+                {Paginas?.map((x) => (
+                  <option value={x} key={x}>
+                    {x}
+                  </option>
+                ))}
+              </select>
+              &nbsp; de {Paginas?.length}
+            </div>
+          </div>
+        </caption>
       </table>
-      <div className="paginador">
-        <div className="row">
-          <div className="col">
-            <span className="pyBadge">Registros: {RegistrosTotal}</span>
-          </div>
-          <div className="col text-center">
-            Pagina: &nbsp;
-            <select
-              value={Pagina}
-              onChange={(e) => {
-                buscarPacientes(e.target.value);
-              }}
-            >
-              {Paginas?.map((x) => (
-                <option value={x} key={x}>
-                  {x}
-                </option>
-              ))}
-            </select>
-            &nbsp; de {Paginas?.length}
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
