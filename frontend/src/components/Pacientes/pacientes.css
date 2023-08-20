@@ -10,7 +10,7 @@
 .table th {
   text-align: center;
   color: var(--dark-brown-1) !important;
-  text-shadow: 1px 0.5px 1px #22222280
+  text-shadow: 1px 0.5px 1px #22222280;
 }
 
 .table th,
@@ -116,7 +116,6 @@
 .form-pacientes .input-group {
   /* width: clamp(50%, auto, 100%); */
   font-size: var(--step--2);
-
 }
 
 .form-pacientes input[type="image"] {
@@ -146,8 +145,8 @@
   border-radius: 0.25em;
 }
 
-.form-pacientes input[type="file"]{
-    background-color: var(--white-1);
+.form-pacientes input[type="file"] {
+  background-color: var(--white-1);
 }
 
 .form-pacientes input[type="file"]::file-selector-button {
@@ -161,7 +160,7 @@
 }
 
 .form-pacientes input[type="file"]::file-selector-button:hover {
-    background-color: #bbe4b8;
+  background-color: #bbe4b8;
 }
 
 .form-pacientes .paciente-descripcion {
@@ -202,40 +201,36 @@
 
 /* medium */
 @media screen and (min-width: 48em) {
-  
-  
   .btn-opciones-pacientes {
     width: 2em;
     height: 2em;
     font-size: var(--step-0) !important;
   }
 
-  
   .form-pacientes .input-group,
   .form-pacientes .input-group-span,
   .form-pacientes .input-group-text {
     font-size: var(--step--1);
   }
 
-}
-
-.btn-grabar,
-.btn-volver {
-  width: 12em !important;
-  height: 4em !important;
-  font-weight: bold !important;
+  .btn-grabar,
+  .btn-volver {
+    width: 12em !important;
+    height: 4em !important;
+    font-weight: bold !important;
+  }
 }
 
 /* large */
 
 @media screen and (min-width: 62em) {
-  
-  .btn-grabar, .btn-volver {
+  .botones-registro > .btn-grabar,
+  .botones-registro > .btn-volver {
     max-width: 180px !important;
     padding: 0.25em;
   }
 
-    .datos-propietarios {
+  .datos-propietarios {
     padding: 0.25em;
     /* height: 14em; */
     /* border-left: 0.15em solid #66666680; */
@@ -247,7 +242,7 @@
     font-size: var(--step--1);
   }
 
-  .form-pacientes input[type="date"]{
+  .form-pacientes input[type="date"] {
     max-width: 50%;
   }
 
@@ -255,7 +250,7 @@
     height: 20vh;
   }
 
-  .table.pacientes-listado{
+  .table.pacientes-listado {
     margin-right: auto;
     margin-left: auto;
     max-width: 90%;
@@ -265,8 +260,9 @@
     font-size: var(--step-0) !important;
   }
 
-  .table td:nth-child(2), .table td:nth-child(3), .table td:nth-child(4) {
+  .table td:nth-child(2),
+  .table td:nth-child(3),
+  .table td:nth-child(4) {
     font-size: var(--step--1) !important;
   }
-
 }
