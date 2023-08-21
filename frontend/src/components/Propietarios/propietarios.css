@@ -14,11 +14,11 @@
   border-radius: 0.5em;
   text-align: center;
 }
-
+/* 
 .propietarios-container {
   background-color: #66666630;
   border-radius: 1em;
-}
+} */
 
 .form-propietarios .btn-grabar {
   width: auto !important;
@@ -35,7 +35,7 @@
 }
 
 .agregar-propietarios .btn-agregar {
-  max-width: 180px !important;
+  max-width: 100% !important;
   color: var(--white-1) !important;
 }
 

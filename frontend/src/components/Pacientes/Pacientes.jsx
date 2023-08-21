@@ -114,7 +114,8 @@ const Pacientes = () => {
   }
 
   function agregarPaciente() {
-    setAccion("A");
+    setAccion("R");
+    setAccionPropietarios("L");
     setItem({
       id: 0,
       Nombre: null,
@@ -140,8 +141,6 @@ const Pacientes = () => {
 
   function regresarListado() {
     setAccion("L");
-    
- // SOLO PARA PRUEBA, REMOVER FUNCION
   }
 
 async function grabarPaciente(item) {

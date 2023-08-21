@@ -42,7 +42,7 @@ const ControlesRegistro = ({
             <>
               <div className="col-5 col-md-3">
                 <button
-                  className="btn btn-volver shadow-small"
+                  className="btn btn-volver btn-hover shadow-small"
                   onClick={(e) => regresar()}
                 >
                   VOLVER<i className="bi bi-arrow-counterclockwise ms-1"></i>
@@ -81,17 +81,19 @@ const ControlesRegistro = ({
               <input
                 className="text-center"
                 type="date"
-                {...register("Fecha", {
-                  required: {
-                    value: true,
-                    message: "La fecha de control es requerida.",
-                  },
-                })}
+                {...register("Fecha"
+                // , {
+                //   required: {
+                //     value: true,
+                //     message: "La fecha de control es requerida.",
+                //   },
+                // }
+                )}
               />
             </div>
-            {errors?.Fecha && touchedFields.Fecha && (
+            {/* {errors?.Fecha && touchedFields.Fecha && (
               <ErrorMessage message={errors?.Fecha.message} />
-            )}
+            )} */}
             {accionControl !== "C" ? (
               <div className="row align-content-center text-center">
                 <div className="col-8 col-md-4 mx-auto">

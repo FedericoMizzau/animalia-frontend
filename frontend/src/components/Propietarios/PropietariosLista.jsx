@@ -30,7 +30,7 @@ const PropietariosLista = ({
             </tr>
           ) : (
             propietarios.map((p) => (
-              <tr>
+              <tr key={p.id}>
                 <td className="fw-bold text-center align-middle">{p.id}</td>
                 <td className="text-center align-middle">{p.Nombre}</td>
                 <td className="text-center align-middle">{p.Apellido}</td>
@@ -43,6 +43,7 @@ const PropietariosLista = ({
                   <div className="row justify-content-start justify-content-lg-center opciones-propietarios">
                     <div className="col-10">
                       <button
+                        type="button"
                         className="btn btn-seleccionar btn-success btn-hover shadow-small"
                         onClick={(e) => {
                           e.preventDefault();
@@ -54,6 +55,7 @@ const PropietariosLista = ({
                     </div>
                     <div className="col-4 me-2">
                       <button
+                        type="button"
                         className="btn btn-modificar btn-hover shadow-small my-1"
                         onClick={(e) => consultarPropietario(p.id, "M")}
                       >
@@ -62,6 +64,7 @@ const PropietariosLista = ({
                     </div>
                     <div className="col-4 ms-1">
                       <button
+                        type="button"
                         className="btn btn-eliminar btn-hover shadow-small my-1"
                         onClick={(e) => eliminarPropietario()}
                       >

@@ -4,6 +4,7 @@ import Controles from "../Controles/Controles.jsx";
 import useScreensize from "../../hooks/useScreensize.js";
 import ErrorMessage from "../ErrorMessage.jsx";
 import Propietarios from "../Propietarios/Propietarios.jsx";
+import { controlesService } from "../../services/controles.service.js";
 
 const controlesTest = [
   {
@@ -56,15 +57,21 @@ const PacientesRegistro = ({
     setAccionPropietarios("L");
   }
 
-  function obtenerControles(id) {
-    // peticion a la api de controles
-  }
+  // function buscarControles() {
+  //   let data = controlesService.BuscarControles(pacienteActual.id);
+  //   console.log(data);
+  //   return data;
+  // }
 
-  console.log(width, height);
+  function obtenerControles(){
+    let data = buscarControles();
+    setControles(data);
+  }
 
   // useEffect para cargar los controles del paciente actual consultado
   useEffect(() => {
     buscarControles(Item.id);
+    // obtenerControles()
   }, []);
 
   function buscarControles(id) {
@@ -77,7 +84,8 @@ const PacientesRegistro = ({
   }
 
   function seleccionarPropietario(id) {
-    setPropietarioSeleccionado(id);
+    pacienteActual.Propietarios_id = id;
+    console.log(pacienteActual.Propietarios_id);
   }
 
   return (
@@ -292,14 +300,14 @@ const PacientesRegistro = ({
           </fieldset>
           <div className="col-12 col-sm-6 col-md-12 col-lg-12 datos-propietarios align-self-center mx-auto">
             <div className="row">
-              <div className="col-12 col-md-6">
+              <div className="col-12 col-md-6 mx-auto">
                 <h4 className="medium-title text-center text-shadow-small">
                   {accion === "R"
-                    ? "SELECCIONAR PROPIETARIO"
-                    : "DATOS DE PROPIETARIO"}
+                    ? "SELECCIONAR RESPONSABLE"
+                    : "DATOS DE RESPONSABLE"}
                 </h4>
               </div>
-              {accionPropietarios !== "R" && (
+              {accionPropietarios === "C" && (
               <div className="col-12 col-md-6 text-center">
                 <button type="button" className="btn btn-modificar btn-hover shadow-small">
                   MODIFICAR
@@ -334,6 +342,7 @@ const PacientesRegistro = ({
                   accionPacientes={accion}
                   seleccionarPropietario={seleccionarPropietario}
                   pacienteActual={pacienteActual}
+                  regresarRegistroPaciente={regresarRegistroPaciente}
                 />
               </div>
             </div>

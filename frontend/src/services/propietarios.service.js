@@ -1,10 +1,20 @@
-import {config} from "../config";
+import { config } from "../config";
 import httpService from "./http.service";
 
 const urlResource = config.urlResourcePropietarios;
 
+async function BuscarPropietarios(Nombre, Pagina) {
+  const resp = await httpService.get(urlResource, {
+    params: { Nombre, Pagina },
+  });
+  console.log(resp.data);
+  return resp.data;
+}
+
 async function BuscarPorId(item) {
-  const resp = await httpService.get(urlResource + "/" + item.id);
+  const resp = await httpService.get(urlResource + "/" + item.id, {
+    params: item.id
+  });
   return resp.data;
 }
 
@@ -21,5 +31,8 @@ async function Grabar(item) {
 }
 
 export const propietariosService = {
-  BuscarPorId,ActivarDesactivar,Grabar
+  BuscarPropietarios,
+  BuscarPorId,
+  ActivarDesactivar,
+  Grabar,
 };

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import PropietariosLista from "./PropietariosLista";
 import "./propietarios.css";
 import ErrorMessage from "../ErrorMessage";
+import { propietariosService } from "../../services/propietarios.service";
 
 const propietarioInicial = {
   id: 0,
@@ -64,29 +65,34 @@ const Propietarios = ({
   pacienteActual,
   regresarRegistroPaciente,
 }) => {
-  const [propietarios, setPropietarios] = useState(propietariosTest);
-  const [propietarioActual, setPropietarioActual] = useState(propietarioInicial);
+  const [propietarios, setPropietarios] = useState([]);
+  const [propietarioActual, setPropietarioActual] =
+    useState(propietarioInicial);
   const {
     register,
     handleSubmit,
     formState: { errors, touchedFields, isValid, isSubmitted },
   } = useForm({ values: propietarioActual });
 
-  function buscarPropietario(id) {
-    let buscado = propietarios.find((p) => p.id === id);
-    if (buscado) return buscado;
-    else return;
+  async function buscarPropietario(id) {
+    let buscado = await propietariosService.BuscarPorId(id);
+    console.log(buscado);
+    setPropietarioActual(buscado);
   }
 
-  function consultarPropietario(id, accion) {
-    let buscado = buscarPropietario(id);
-    setPropietarioActual(buscado);
+  async function buscarPropietarios() {
+    let data = await propietariosService.BuscarPropietarios();
+    setPropietarios(data.Items);
+  }
+
+  async function consultarPropietario(id, accion) {
+    await buscarPropietario(id);
     setAccionPropietarios(accion);
   }
 
-  function grabarPropietario(propietario) {
-    propietario.id = propietarios.length + 1; // simular autoincremental
-    setPropietarios(...propietarios, propietario);
+  async function grabarPropietario(item) {
+    let res = await propietariosService.Grabar(item);
+    console.log(res);
     setAccionPropietarios("L");
   }
 
@@ -99,6 +105,23 @@ const Propietarios = ({
     grabarPropietario(data);
   };
 
+  // useEffect para cargar el propietario actual cuando viene desde el consultar paciente
+
+  // useEffect(() => {
+     
+  //   return () => {
+  //   buscarPropietario(pacienteActual.Propietarios_id);
+  //   }
+  // }, []);
+
+  // useEffect para cargar los propietarios iniciales
+
+  useEffect(() => {
+    return () => {
+      buscarPropietarios();
+    };
+  }, []);
+
   // useEffect para cambiar la accion de propietario según la del paciente
   useEffect(() => {
     return () => {
@@ -107,16 +130,16 @@ const Propietarios = ({
   }, [accionPacientes]);
 
   return (
-    <div className="propietarios-container container-fluid opacity-chg-low my-2">
+    <div className="propietarios-container container-fluid opacity-chg-low my-1">
       {accionPropietarios === "L" && (
-        <div className="row agregar-propietarios mt-2">
-          <div className="col-12 text-center my-1">
+        <div className="row agregar-propietarios">
+          <div className="col-12 text-center">
             <button
               type="button"
               className="btn btn-agregar btn-success shadow-small"
               onClick={(e) => agregarPropietario()}
             >
-              AGREGAR PROPIETARIO
+              AGREGAR RESPONSABLE
               <i className="bi bi-plus-lg ms-2"></i>
             </button>
           </div>
@@ -137,7 +160,7 @@ const Propietarios = ({
           {accionPropietarios === "R" && (
             <div className="row container-title-registro my-1">
               <h3 className="title-registrar-propietario text-shadow-small">
-                REGISTRAR PROPIETARIO
+                REGISTRAR RESPONSABLE
               </h3>
             </div>
           )}
@@ -151,7 +174,7 @@ const Propietarios = ({
                     {...register("Nombre", {
                       required: {
                         value: true,
-                        message: "El nombre del propietario es requerido.",
+                        message: "El nombre del responsable es requerido.",
                       },
                     })}
                   />
@@ -186,7 +209,8 @@ const Propietarios = ({
             {accionPropietarios === "R" && (
               <div className="row justify-content-center my-3">
                 <div className="col-6 mx-auto text-center">
-                  <button className="btn btn-grabar btn-hover shadow-small">
+                  <button className="btn btn-grabar btn-hover shadow-small" 
+                  type="submit">
                     GRABAR
                     <i className="bi bi-check-lg ms-1"></i>
                   </button>
