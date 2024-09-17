@@ -3,7 +3,7 @@
 .medium-title {
   font-size: var(--step-1);
   font-weight: bold;
-  color: var(--dark-green-1);
+  color: var(--white-1);
 }
 
 /* Estilos de componente listado */
@@ -33,6 +33,14 @@
   border: none;
   /* border: thin solid var(--bs-border-color); */
   text-align: center;
+}
+
+
+
+.paginador select{
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.25em;
+  outline: none;
 }
 
 .btn-opciones-pacientes:hover {
@@ -79,16 +87,15 @@
   font-size: var(--step--1);
 }
 
-.title-buscar,
-.title-consulta {
-  width: 100%;
-  margin-top: 0.25em !important;
-  padding: 0.25em 0.5em;
-  color: var(--orange-1);
-  font-size: var(--step-2);
-  font-weight: bold;
-  text-shadow: 1px 1px 2px #00000080;
-  text-align: center;
+.title-buscar, .title-consulta {
+    width: 100%;
+    margin-top: 0.25em !important;
+    padding: 0.25em 0.5em;
+    color: var(--dark-orange-1);
+    font-size: var(--step-2);
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #00000080;
+    text-align: center;
 }
 
 /* Componente pacientesRegistro */
@@ -156,14 +163,19 @@
   background-color: #bbe4b8;
 }
 
+.form-pacientes .paciente-descripcion {
+  width: 65%;
+  padding: 0.25em;
+}
+
+/* 
 .form-pacientes .descripcion {
   width: 65%;
   height: clamp(5vh, 10vh, 20vh);
-  resize: none;
   border: 1px solid #dee2e6;
   border-radius: 0.25em;
   outline: none;
-}
+} */
 
 .form-pacientes .input-peso::placeholder {
   text-align: end;

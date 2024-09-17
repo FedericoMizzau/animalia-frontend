@@ -1,0 +1,16 @@
+
+.bg {
+    background-image: url('../../syles/statics/animalia.jpg');
+    background-position: center center;
+    background-size: cover;
+    transition: opacity 0.3s ease;
+}
+
+.bg:hover {
+    opacity: 0.9;
+}
+
+
+#login{
+    background-color: #EFE6D7 !important
+}

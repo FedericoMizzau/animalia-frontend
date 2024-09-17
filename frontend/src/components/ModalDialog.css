@@ -1,0 +1,33 @@
+.bg-success {
+    background-color: #555c34 !important;
+  }
+  
+  .bg-danger {
+    background-color:#555c34 !important;
+  }
+  
+  .bg-info {
+    background-color: #555c34  !important;
+  }
+  
+  .bg-warning {
+    background-color: #555c34 !important;
+    border-color: #c5652d !important;
+  }
+
+  .btn.btn-primary{
+    background-color: #555c34 !important;
+    border: #ff00 !important;
+    transition:  opacity 0.1s ease;
+  }
+
+  .btn.btn-primary:hover{
+    opacity: 0.9 !important;
+  }
+  .progress{
+    background-color: #c5652d !important;
+  }
+
+  .progress-bar.progress-bar-striped.progress-bar-animated{
+    background-color: #c5652d !important;
+  }

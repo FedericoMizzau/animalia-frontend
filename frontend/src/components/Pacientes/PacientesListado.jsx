@@ -3,16 +3,17 @@ import moment from "moment";
 import "./pacientes.css";
 
 const PacientesListado = ({
-  pacientes,
-  pacienteActual,
-  accion,
-  setAccion,
+  Items,
   consultarPaciente,
-  eliminarPaciente,
+  Pagina,
+  RegistrosTotal,
+  Paginas,
+  buscarPacientes,
+  Modificar,
 }) => {
   return (
     <div className="table-responsive-sm opacity-chg-low">
-      <table className="table table-warning table-hover pacientes-listado">
+      <table className="table table-warning table-hover pacientes-listado shadow-small">
         <thead>
           <tr className="align-middle">
             <th>NRO</th>
@@ -23,22 +24,25 @@ const PacientesListado = ({
           </tr>
         </thead>
         <tbody>
-          {pacientes.length === 0 ? (
+          {Items && Items.length === 0 ? (
             <tr>
               <td>No se encontraron pacientes</td>
             </tr>
           ) : (
-            pacientes.map((p) => (
+            Items &&
+            Items.map((p) => (
               <tr key={p.id}>
                 <td className="fw-bold text-center">{p.id}</td>
                 <td>{p.Nombre}</td>
-                <td className="text-center">{moment(p.FechaNacimiento).format("DD/MM/YYYY")}</td>
+                <td className="text-center">
+                  {moment(p.FechaNacimiento).format("DD/MM/YYYY")}
+                </td>
                 <td className="fw-bold text-center">{p.Propietarios_id}</td>
                 <td>
                   <div className="row justify-content-center align-items-center">
                     <div className="col-3">
                       <button
-                        onClick={(e) => consultarPaciente(p.id, "C")}
+                        onClick={(e) => consultarPaciente(p)}
                         className="btn-opciones-pacientes consultar"
                       >
                         {/* C&nbsp; */}
@@ -47,28 +51,53 @@ const PacientesListado = ({
                     </div>
                     <div className="col-3">
                       <button
-                        onClick={(e) => consultarPaciente(p.id, "M")}
+                        onClick={(e) => Modificar(p)}
                         className="btn-opciones-pacientes modificar"
                       >
                         {/* M */}
                         <i className="bi bi-pencil"></i>
                       </button>
                     </div>
-                    <div className="col-3">
+                    {/*<div className="col-3">
                       <button
-                        onClick={(e) => eliminarPaciente(p.id)}
+                        onClick={(e) => eliminarPaciente(p)}
                         className="btn-opciones-pacientes eliminar"
                       >
-                        {/* X&nbsp; */}
+                        
                         <i className="bi bi-trash3"></i>
                       </button>
-                    </div>
+                    </div>*/}
                   </div>
                 </td>
               </tr>
             ))
           )}
         </tbody>
+        <caption>
+          <div className="paginador row">
+            <div className="col-6 text-center">
+              <span><b>Registros:</b> {RegistrosTotal}</span>
+            </div>
+            <div className="col-6 text-center">
+              <span>
+                <b>Pagina:</b> &nbsp;
+              </span>
+              <select
+                value={Pagina}
+                onChange={(e) => {
+                  buscarPacientes(e.target.value);
+                }}
+              >
+                {Paginas?.map((x) => (
+                  <option value={x} key={x}>
+                    {x}
+                  </option>
+                ))}
+              </select>
+              &nbsp; de {Paginas?.length}
+            </div>
+          </div>
+        </caption>
       </table>
     </div>
   );
